@@ -27,7 +27,8 @@ class Product extends Model {
         'options'    => 'json',
     ];
 
-    public function category() {
+    public function category()
+    {
         return $this->belongsTo(Category::class);
     }
 

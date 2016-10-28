@@ -18,7 +18,8 @@ class OrderItem extends Model {
 
     protected $hidden = ['order_id', 'product_id', 'created_at', 'updated_at'];
 
-    public function product() {
+    public function product()
+    {
         return $this->belongsTo(Product::class);
     }
 }
