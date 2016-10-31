@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/products', 'ProductsController@index');
+Route::get('/products/{id}', 'ProductsController@show');
 Route::get('/orders', 'OrdersController@index');
 
 Route::get('/user', function (Request $request) {
