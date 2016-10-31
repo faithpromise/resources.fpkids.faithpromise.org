@@ -16,10 +16,10 @@ class ProductSeeder extends Seeder {
 
         DB::table('products')->truncate();
 
-        $vol_shirt_options = json_decode('{"names":["Size","Color"],"values":[{"Adult Small":["Gray w/ Orange","Green w/ Orange","Blue w/ White","Red w/ White"]},{"Adult Medium":["Gray w/ Orange","Green w/ Orange","Blue w/ White","Red w/ White"]},{"Adult Large":["Gray w/ Orange","Green w/ Orange","Blue w/ White","Red w/ White"]},{"Adult X-Large":["Gray w/ Orange","Green w/ Orange","Blue w/ White","Red w/ White"]},{"Adult 2X-Large":["Gray w/ Orange","Green w/ Orange","Blue w/ White","Red w/ White"]},{"Adult 3X-Large":["Gray w/ Orange","Green w/ Orange","Blue w/ White","Red w/ White"]}]}');
-        $kidrave_shirt_options = json_decode('{"names":["Size"],"values":["Youth Small","Youth Medium","Youth Large","Adult Small","Adult Medium","Adult Large","Adult X-Large"]}');
-        $security_shirt_options = json_decode('{"names":["Size"],"values":["Adult Small","Adult Medium","Adult Large","Adult X-Large","Adult 2X-Large","Adult 3X-Large"]}');
-        $childcare_shirt_options = json_decode('{"names":["Size"],"values":["Adult Small","Adult Medium","Adult Large","Adult X-Large","Adult 2X-Large"]}');
+        $vol_shirt_options = json_decode('[{"name":"Size","values":["Adult Small","Adult Medium","Adult Large","Adult X-Large","Adult 2X-Large"]},{"name":"Color Preference","values":[{"label":"Gray w/ Orange","available_in":["Adult Small","Adult Medium","Adult Large","Adult X-Large","Adult 2X-Large"]},{"label":"Green w/ Orange","available_in":["Adult Small","Adult Medium","Adult Large","Adult X-Large","Adult 2X-Large"]},{"label":"Blue w/ White","available_in":["Adult Small","Adult Medium","Adult Large","Adult X-Large","Adult 2X-Large"]},{"label":"Red w/ White","available_in":["Adult Small","Adult Medium","Adult Large","Adult X-Large","Adult 2X-Large"]}]}]');
+        $kidrave_shirt_options = json_decode('[{"name":"Size","values":["Youth Small","Youth Medium","Youth Large","Adult Small","Adult Medium","Adult Large","Adult X-Large"]}]');
+        $security_shirt_options = json_decode('[{"name":"Size","values":["Adult Small","Adult Medium","Adult Large","Adult X-Large","Adult 2X-Large","Adult 3X-Large"]}]');
+        $childcare_shirt_options = json_decode('[{"name":"Size","values":["Adult Small","Adult Medium","Adult Large","Adult X-Large","Adult 2X-Large"]}]');
 
         $products = [
             [
