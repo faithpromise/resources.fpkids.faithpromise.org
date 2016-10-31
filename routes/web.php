@@ -13,4 +13,4 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('{path?}', ['uses' => 'Main@index'])->where('path', '.+');
+Route::get('{path?}', ['uses' => 'MainController@index'])->where('path', '.+');
