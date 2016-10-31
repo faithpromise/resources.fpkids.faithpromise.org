@@ -9,11 +9,13 @@ class ProductsController extends Controller {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return mixed
      */
     public function index()
     {
-        return Product::orderBy('name')->get();
+        $result = ['data' => Product::orderByRaw('TRIM(LEADING \'"\' FROM name)')->get()];
+
+        return $result;
     }
 
     /**
