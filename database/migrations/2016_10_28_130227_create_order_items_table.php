@@ -15,7 +15,7 @@ class CreateOrderItemsTable extends Migration {
             $table->increments('id');
             $table->integer('order_id');
             $table->integer('product_id');
-            $table->json('options')->nullable();
+            $table->string('choices')->nullable();
             $table->string('quantity');
             $table->timestamps();
         });
