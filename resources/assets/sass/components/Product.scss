@@ -1,0 +1,41 @@
+.Product {
+  display:          flex;
+  flex-direction:   row;
+  padding:          10px;
+  border:           1px solid #ccc;
+  background-color: #fff;
+
+  color:            inherit;
+  &, &:hover {
+    text-decoration: none;
+  }
+}
+
+.Product-imageWrap {
+  flex-shrink: 0;
+  width:       15%;
+}
+
+.Product-image {
+  padding-top:      100%;
+  background-size:  cover;
+  background-color: #eaeaea;
+  border-radius:    5px;
+}
+
+.Product-info {
+  flex-grow: 1;
+  padding:   10px 20px;
+}
+
+.Product-name {
+  margin:      0;
+  font-size:   17px;
+  font-weight: 600;
+}
+
+.Product-description {
+  margin:    0;
+  font-size: 14px;
+  color:     #444;
+}
