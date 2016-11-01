@@ -1,9 +1,11 @@
+
 .Product {
   display:          flex;
-  flex-direction:   row;
-  padding:          10px;
-  border:           1px solid #ccc;
+  flex-direction:   column;
+  width:            100%;
+  padding:          10px 10px 20px;
   background-color: #fff;
+  border-radius:    5px;
 
   color:            inherit;
   &, &:hover {
@@ -11,31 +13,26 @@
   }
 }
 
-.Product-imageWrap {
-  flex-shrink: 0;
-  width:       15%;
-}
-
 .Product-image {
-  padding-top:      100%;
-  background-size:  cover;
-  background-color: #eaeaea;
-  border-radius:    5px;
+  padding-top:     56.25%;
+  background:      #eaeaea 50% 20%;
+  background-size: cover;
+  border-radius:   2px;
 }
 
 .Product-info {
-  flex-grow: 1;
-  padding:   10px 20px;
+  text-align: center;
 }
 
 .Product-name {
-  margin:      0;
-  font-size:   17px;
+  margin:      20px 0 10px;
+  font-size:   15px;
   font-weight: 600;
 }
 
 .Product-description {
   margin:    0;
-  font-size: 14px;
+  padding:   0 10px;
+  font-size: 13px;
   color:     #444;
 }

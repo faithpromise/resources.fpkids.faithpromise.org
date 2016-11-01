@@ -1,5 +1,18 @@
+.ProductAdded {
+  padding:    20px;
+  max-width:  400px;
+  margin:     0 auto;
+  text-align: center;
+}
+
+.ProductAdded-title {
+  color: #666;
+}
+
 .ProductDetail {
   min-height:       100vh;
+  max-width:        690px;
+  margin:           0 auto;
   padding:          40px;
   background-color: #fff;
   border-left:      1px solid #ccc;

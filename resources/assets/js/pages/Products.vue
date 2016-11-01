@@ -1,7 +1,9 @@
 <template>
-  <div>
-    <ul class="ProductList">
-      <li class="ProductList-item" v-for="product in products">
+  <div class="Products">
+
+    <ul class="Products-list">
+      <li class="Products-item" v-for="product in products">
+
         <router-link class="Product" v-bind:to="{ name: 'product', params: { id: product.id } }">
           <div class="Product-imageWrap">
             <div class="Product-image" v-bind:style="{ backgroundImage: product.image_url ? ('url(' + product.image_url + ')') : 'none' }"></div>
@@ -11,6 +13,7 @@
             <p class="Product-description">{{ product.description}}</p>
           </div>
         </router-link>
+
       </li>
     </ul>
   </div>

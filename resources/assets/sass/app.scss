@@ -9,6 +9,7 @@
 
 body {
   margin:           0;
+  padding:          0;
   font-family:      'Open Sans', sans-serif;
   background-color: #f7f7f7;
 }
@@ -17,6 +18,7 @@ body {
 @import "components/Product";
 @import "components/ProductList";
 @import "components/ProductDetail";
+@import "components/CartPreview";
 
 .Button {
   display:         inline-block;
@@ -27,11 +29,13 @@ body {
   white-space:     nowrap;
   text-decoration: none;
   border:          0 none;
+  border-radius:   5px;
   padding:         .625rem .875rem;
   font-size:       16px;
 
-  &:active:focus {
-    outline: 0 none;
+  &:active,
+  &:focus {
+    outline: none !important;
   }
 
   &:disabled,
@@ -113,6 +117,7 @@ body {
   margin:           0 10px 10px 0;
   padding:          6px 10px;
   border:           1px solid #ccc;
+  border-radius:    4px;
   cursor:           pointer;
   user-select:      none;
   background-color: #f3f3f3;
@@ -128,35 +133,6 @@ body {
     opacity: 0.5;
     cursor:  default;
   }
-}
-
-.Layout {
-  max-width: 1200px;
-  margin:    0 auto;
-}
-
-.Layout-container {
-  display: flex;
-}
-
-.Cart,
-.Layout-menu--cart,
-.Layout-pusher {
-  width: 480px;
-}
-
-.Layout-menu--nav {
-  width: 240px;
-}
-
-.Nav,
-.Cart {
-  position: fixed;
-  padding:  40px;
-}
-
-.Layout-menu--cart {
-  order: 3;
 }
 
 //.ProductLayout {

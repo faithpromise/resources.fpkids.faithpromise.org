@@ -1,0 +1,9 @@
+$desktop_container_max_width: 1280px;
+$Container-h-padding: 40px;
+
+%Container {
+  max-width:  $desktop_container_max_width;
+  margin:     0 auto;
+  padding:    0 $Container-h-padding;
+  list-style: none;
+}

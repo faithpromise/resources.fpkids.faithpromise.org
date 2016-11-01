@@ -1,60 +1,77 @@
 <template>
-  <div class="ProductDetail">
+
+  <div>
+
+    <div class="ProductAdded" v-if="is_added">
+
+      <h2 class="ProductAdded-title">Item Added to Cart</h2>
+
+      <router-link class="Button" to="/cart">Checkout</router-link>
+      <router-link class="Button" to="/products">Keep Shopping</router-link>
+
+      <p>
+        <span v-on:click="reset()">View &quot;{{ product.name }}&quot; again</span>
+      </p>
 
 
+    </div>
 
-    <div class="ProductDetail-header">
-      <div class="ProductDetail-imageWrap">
-        <div class="ProductDetail-image" v-bind:style="{ backgroundImage: product.image_url ? ('url(' + product.image_url + ')') : 'none' }"></div>
+    <div class="ProductDetail" v-if="product && !is_added">
+
+      <div class="ProductDetail-header">
+        <div class="ProductDetail-imageWrap">
+          <div class="ProductDetail-image" v-bind:style="{ backgroundImage: product.image_url ? ('url(' + product.image_url + ')') : 'none' }"></div>
+        </div>
+        <div class="ProductDetail-info">
+          <h1 class="ProductDetail-name">{{ product.name }}</h1>
+          <p class="ProductDetail-description">{{ product.description }}</p>
+        </div>
       </div>
-      <div class="ProductDetail-info">
-        <h1 class="ProductDetail-name">{{ product.name }}</h1>
-        <p class="ProductDetail-description">{{ product.description }}</p>
+
+      <div class="ProductDetail-optionGroup" v-if="product.options && product.options.length">
+
+        <span class="ProductDetail-optionLabel">{{ product.options[0].name }}:</span>
+
+        <ul class="OptionList">
+          <li class="OptionList-item"
+                  v-bind:class="{ 'is-selected': choice_1 === option }"
+                  v-for="option in product.options[0].values"
+                  v-on:click="select_primary_option(option)">
+            {{ option }}
+          </li>
+        </ul>
+
       </div>
-    </div>
 
-    <div class="ProductDetail-optionGroup" v-if="product.options && product.options.length">
+      <div class="ProductDetail-optionGroup" v-if="product.options && product.options.length > 1">
 
-      <span class="ProductDetail-optionLabel">{{ product.options[0].name }}:</span>
+        <span class="ProductDetail-optionLabel">{{ product.options[1].name }}:</span>
 
-      <ul class="OptionList">
-        <li class="OptionList-item"
-                v-bind:class="{ 'is-selected': product.options[0].selected === option }"
-                v-for="option in product.options[0].values"
-                v-on:click="select_primary_option(option)">
-          {{ option }}
-        </li>
-      </ul>
+        <ul class="OptionList">
+          <li class="OptionList-item"
+                  v-if=""
+                  v-bind:class="{ 'is-selected': choice_2 === option.label, 'is-disabled': !secondary_option_available(option) }"
+                  v-for="option in product.options[1].values"
+                  v-on:click="select_secondary_option(option)">
+            {{ option.label }}
+          </li>
+        </ul>
 
-    </div>
+      </div>
 
-    <div class="ProductDetail-optionGroup" v-if="product.options && product.options.length > 1">
+      <div class="ProductDetail-optionGroup">
 
-      <span class="ProductDetail-optionLabel">{{ product.options[1].name }}:</span>
+        <span class="ProductDetail-optionLabel">Quantity:</span>
 
-      <ul class="OptionList">
-        <li class="OptionList-item"
-                v-if=""
-                v-bind:class="{ 'is-selected': product.options[1].selected === option.label, 'is-disabled': !secondary_option_available(option) }"
-                v-for="option in product.options[1].values"
-                v-on:click="select_secondary_option(option)">
-          {{ option.label }}
-        </li>
-      </ul>
+        <ul class="OptionList">
+          <li class="OptionList-item" v-bind:class="{ 'is-selected': quantity === qty }" v-for="qty in product.quantities" v-on:click="set_quantity(qty)">{{ qty }}</li>
+        </ul>
+
+      </div>
+
+      <button class="Button Button--add-to-cart" v-on:click="add_to_cart">Add Item</button>
 
     </div>
-
-    <div class="ProductDetail-optionGroup">
-
-      <span class="ProductDetail-optionLabel">Quantity:</span>
-
-      <ul class="OptionList">
-        <li class="OptionList-item" v-bind:class="{ 'is-selected': quantity === qty }" v-for="qty in product.quantities" v-on:click="set_quantity(qty)">{{ qty }}</li>
-      </ul>
-
-    </div>
-
-    <button class="Button Button--add-to-cart" v-on:click="add_to_cart">Add Item</button>
 
   </div>
 </template>
@@ -67,17 +84,7 @@
       let self = this;
 
       this.$http.get('/api/products/' + this.$route.params.id).then(function (data) {
-
-        let product = data.data.data;
-
-        // Need to add "selected" property so that it's observable
-        if (product.options) {
-          for (let i = 0; i < product.options.length; i++) {
-            product.options[i].selected = null;
-          }
-        }
-
-        self.$store.commit('SELECT_PRODUCT', product);
+        self.$store.commit('SELECT_PRODUCT', data.data.data);
       });
 
     },
@@ -89,7 +96,10 @@
     data: function () {
       return {
         quantity: 0,
-        options:  {}
+        options:  {},
+        choice_1: null,
+        choice_2: null,
+        is_added: false
       }
     },
 
@@ -102,18 +112,18 @@
         if (this.product.options && this.product.options.length > 0) {
 
           // Add first option
-          if (!this.product.options[0].selected) {
+          if (!this.choice_1) {
             return alert('Please select a ' + this.product.options[0].name);
           }
 
-          this.product.choices = this.product.options[0].selected;
+          this.product.choices = this.choice_1;
 
           // Add second option
           if (this.product.options.length > 1) {
-            if (!this.product.options[1].selected) {
+            if (!this.choice_2) {
               return alert('Please select a ' + this.product.options[1].name);
             }
-            this.product.choices += ' / ' + this.product.options[1].selected;
+            this.product.choices += ' / ' + this.choice_2;
           }
 
         }
@@ -123,6 +133,8 @@
         }
 
         this.$store.commit('ADD_TO_CART', this.product);
+        this.is_added = true;
+
       },
 
       set_quantity: function (qty) {
@@ -130,22 +142,29 @@
       },
 
       select_primary_option(option) {
-        this.product.options[0].selected = option;
+        this.choice_1 = option;
         // Reset secondary option
         if (this.product.options.length > 1) {
-          this.product.options[1].selected = null;
+          this.choice_2 = null;
         }
       },
 
       select_secondary_option(option) {
         if (this.secondary_option_available(option)) {
-          this.product.options[1].selected = option.label;
+          this.choice_2 = option.label;
         }
       },
 
       secondary_option_available: function (option) {
         return this.product.options.length > 1
-                && option.available_in.indexOf(this.product.options[0].selected) >= 0;
+                && option.available_in.indexOf(this.choice_1) >= 0;
+      },
+
+      reset: function() {
+        this.quantity = 0;
+        this.choice_1 = null;
+        this.choice_2 = null;
+        this.is_added = false;
       }
     },
 

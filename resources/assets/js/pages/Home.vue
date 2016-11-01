@@ -1,29 +1,23 @@
 <template>
+
   <div class="Layout-container" v-bind:class="{ 'nav-open': nav_visible }" v-on:click="hide_nav">
-    <div class="Layout-menu Layout-menu--nav">
-      <div class="Nav">
-        <ul class="Nav-list">
-          <li class="Nav-item">
-            <router-link v-bind:to="{ name: 'products' }">All Products</router-link>
-          </li>
-        </ul>
-      </div>
-    </div>
-    <div class="Layout-menu Layout-menu--cart">
-      <cart></cart>
-    </div>
-    <div class="Layout-pusher">
-      <div class="Layout-content">
-        <div class="Layout-content-inner">
-          <router-view></router-view>
-        </div>
-      </div>
-    </div>
+
+    <!--<div class="Nav">-->
+      <!--<ul class="Nav-list">-->
+        <!--<li class="Nav-item">-->
+          <!--<router-link v-bind:to="{ name: 'products' }">All Products</router-link>-->
+        <!--</li>-->
+      <!--</ul>-->
+    <!--</div>-->
+
+    <router-view></router-view>
+    <cart-preview></cart-preview>
+
   </div>
 </template>
 <script>
 
-  import Cart from '../components/Cart.vue';
+  import CartPreview from '../components/CartPreview.vue';
 
   function hasParentClass(e, class_name) {
 
@@ -41,7 +35,7 @@
 
   export default {
     components: {
-      'cart': Cart
+      'cart-preview': CartPreview
     },
     methods:    {
       hide_nav:    function (evt) {
