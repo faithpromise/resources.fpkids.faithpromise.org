@@ -7,3 +7,12 @@ $Container-h-padding: 40px;
   padding:    0 $Container-h-padding;
   list-style: none;
 }
+
+%ModalWrapper {
+  display:          flex;
+  flex-direction:   column;
+  justify-content:  center;
+  min-height:       100vh;
+  padding:          100px 40px;
+  background-color: #333;
+}

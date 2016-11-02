@@ -1,0 +1,40 @@
+.CartWrapper {
+  @extend %ModalWrapper;
+  background-color: #8d2dea;
+}
+
+.Cart {
+  width:            100%;
+  max-width:        760px;
+  margin:           0 auto;
+  padding:          40px;
+  border-radius:    7px;
+  background-color: #fff;
+}
+
+.Cart-title {
+  margin:         0;
+  text-transform: uppercase;
+  color:          #333;
+  font-weight:    600;
+  font-size:      28px;
+}
+
+.Cart-subtitle {
+  margin: 0 0 30px;
+}
+
+.Cart-title > p {
+  margin-top: 0;
+}
+
+.Cart-list {
+  padding:    0;
+  border-top: 1px solid #e6e6e6;
+  list-style: none;
+}
+
+.Cart-item {
+  padding:       15px 0;
+  border-bottom: 1px solid #e6e6e6;
+}
