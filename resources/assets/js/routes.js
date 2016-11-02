@@ -1,6 +1,7 @@
 import Home from './pages/Home.vue';
 import Products from './pages/Products.vue';
 import ProductDetail from './pages/ProductDetail.vue';
+import Checkout from './pages/Checkout.vue';
 
 const routes = [
     {
@@ -16,8 +17,13 @@ const routes = [
             },
             {
                 name:      'product',
-                path:      ':id',
+                path:      '/products/:id',
                 component: ProductDetail
+            },
+            {
+                name:      'checkout',
+                path:      '/checkout',
+                component: Checkout
             }
         ]
     }

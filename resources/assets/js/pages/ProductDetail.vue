@@ -1,18 +1,19 @@
 <template>
 
-  <div>
+  <div class="ProductWrapper">
 
     <div class="ProductAdded" v-if="is_added">
 
+      <span class="CloseButton" v-on:click="reset()">
+        <img class="CloseButton-image" src="/images/close.svg">
+      </span>
+
       <h2 class="ProductAdded-title">Item Added to Cart</h2>
 
-      <router-link class="Button" to="/cart">Checkout</router-link>
-      <router-link class="Button" to="/products">Keep Shopping</router-link>
-
       <p>
-        <span v-on:click="reset()">View &quot;{{ product.name }}&quot; again</span>
+        <router-link class="Button" to="/products">Keep Shopping</router-link>
+        <router-link class="Button Button--primary" v-bind:to="{ name: 'checkout' }">Checkout</router-link>
       </p>
-
 
     </div>
 
@@ -69,13 +70,15 @@
 
       </div>
 
-      <button class="Button Button--add-to-cart" v-on:click="add_to_cart">Add Item</button>
+      <button class="Button Button--add-to-cart" v-on:click="add_to_cart">Add to Cart</button>
 
     </div>
 
   </div>
 </template>
 <script>
+
+  const back_button = { label: 'Products', route: { name: 'products' } };
 
   export default {
 
@@ -85,12 +88,14 @@
 
       this.$http.get('/api/products/' + this.$route.params.id).then(function (data) {
         self.$store.commit('SELECT_PRODUCT', data.data.data);
+        this.$store.commit("UPDATE_BACK_BUTTON", back_button);
       });
 
     },
 
     beforeDestroy() {
       this.$store.commit('DESELECT_PRODUCT');
+      this.$store.commit("REMOVE_BACK_BUTTON", back_button);
     },
 
     data: function () {
@@ -160,7 +165,7 @@
                 && option.available_in.indexOf(this.choice_1) >= 0;
       },
 
-      reset: function() {
+      reset: function () {
         this.quantity = 0;
         this.choice_1 = null;
         this.choice_2 = null;
