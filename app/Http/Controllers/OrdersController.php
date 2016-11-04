@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\OrderConfirmation;
 use App\Models\Order;
 use App\Models\OrderItem;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class OrdersController extends Controller {
     /**
@@ -44,6 +46,10 @@ class OrdersController extends Controller {
                 'quantity'   => $item['quantity'],
             ]);
         }
+
+        $order->load('items.product');
+
+        Mail::to($order->email)->send(new OrderConfirmation($order));
 
     }
 
