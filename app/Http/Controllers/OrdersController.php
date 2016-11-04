@@ -3,13 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
+use App\Models\OrderItem;
 use Illuminate\Http\Request;
 
 class OrdersController extends Controller {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return mixed
      */
     public function index(Request $request)
     {
@@ -21,7 +22,7 @@ class OrdersController extends Controller {
             $orders->where('email', '=', $email);
         }
 
-        return $orders->get();
+        return ['data' => $orders->get()];
 
     }
 
@@ -33,18 +34,30 @@ class OrdersController extends Controller {
      */
     public function store(Request $request)
     {
-        //
+        $order = Order::create($request->only('email', 'campus'));
+
+        foreach ($request->get('items') as $item) {
+            OrderItem::create([
+                'order_id'   => $order->id,
+                'product_id' => $item['id'],
+                'choices'    => $item['choices'],
+                'quantity'   => $item['quantity'],
+            ]);
+        }
+
     }
 
     /**
      * Display the specified resource.
      *
      * @param  int $id
-     * @return \Illuminate\Http\Response
+     * @return mixed
      */
     public function show($id)
     {
-        //
+        $result = ['data' => Order::with('items.product')->find($id)];
+
+        return $result;
     }
 
     /**

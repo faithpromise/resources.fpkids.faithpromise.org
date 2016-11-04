@@ -33,7 +33,7 @@ class ProductsController extends Controller {
      * Display the specified resource.
      *
      * @param  int $id
-     * @return \Illuminate\Http\Response
+     * @return mixed
      */
     public function show($id)
     {
