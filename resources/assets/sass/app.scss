@@ -11,8 +11,18 @@ body {
   margin:           0;
   padding:          0;
   font-family:      'Open Sans', sans-serif;
+  font-size:        16px;
   background-color: #f7f7f7;
   overflow:         scroll;
+
+  @media (max-width: 639px) {
+    background-color: #fff;
+    padding-top:      80px;
+  }
+
+  @media (max-width: 420px) {
+    padding-top: 100px;
+  }
 }
 
 @import "include-media";
@@ -23,6 +33,7 @@ body {
 @import "components/CartItem";
 @import "components/CartPreview";
 @import "components/CloseButton";
+@import "components/Form";
 
 .Button {
   display:         inline-block;
@@ -34,8 +45,13 @@ body {
   text-decoration: none;
   border:          0 none;
   border-radius:   5px;
-  padding:         .625rem .875rem;
+  padding:         15px;
+  line-height:     1;
   font-size:       16px;
+
+  &--flush {
+    width: 100%;
+  }
 
   &:active,
   &:focus {

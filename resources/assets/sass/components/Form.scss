@@ -1,0 +1,44 @@
+.CheckoutForm-wrap {
+  padding:          5px;
+  border-radius:    6px;
+  background-color: #e3e3e3;
+}
+
+.CheckoutForm {
+  @extend .Form-horizontal;
+}
+
+.Form-control {
+  height:           46px;
+  width:            100%;
+  padding:          0 10px;
+  border:           1px solid #ccc;
+  border-radius:    4px;
+  font-size:        17px;
+  background-color: #fff;
+  color:            #555;
+}
+
+.Form-horizontal {
+  display:     flex;
+  margin-left: -8px;
+
+  > .Form-group {
+    padding-left: 8px;
+  }
+}
+
+.CheckoutForm--email {
+  flex-grow: 1;
+}
+
+@media (max-width: 639px) {
+  .CheckoutForm {
+    flex-direction: column;
+    margin-top:     -5px;
+  }
+
+  .CheckoutForm .Form-group {
+    margin-top: 5px;
+  }
+}

@@ -1,6 +1,10 @@
 .Products {
   @extend %Container;
-  padding-top: 120px;
+  padding-top: 20px;
+
+  @media (min-width: 640px) {
+    padding-top: 120px;
+  }
 }
 
 .Products-list {

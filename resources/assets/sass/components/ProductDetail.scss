@@ -1,11 +1,6 @@
 .ProductAdded {
-  display:          flex;
-  width:            100%;
-  max-width:        690px;
-  margin:           0 auto;
-  padding:          40px;
-  border-radius:    7px;
-  background-color: #fff;
+  @extend %Modal;
+  max-width: 690px;
 }
 
 .ProductAdded-title {
@@ -18,12 +13,8 @@
 }
 
 .ProductDetail {
-  width:            100%;
-  max-width:        690px;
-  margin:           0 auto;
-  padding:          40px;
-  border-radius:    7px;
-  background-color: #fff;
+  @extend %Modal;
+  max-width: 690px;
 }
 
 .ProductDetail-header {

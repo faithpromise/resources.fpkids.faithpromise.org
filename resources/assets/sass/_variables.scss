@@ -6,6 +6,10 @@ $Container-h-padding: 40px;
   margin:     0 auto;
   padding:    0 $Container-h-padding;
   list-style: none;
+
+  @media (max-width: 639px) {
+    padding: 0 15px;
+  }
 }
 
 %ModalWrapper {
@@ -15,4 +19,24 @@ $Container-h-padding: 40px;
   min-height:       100vh;
   padding:          100px 40px;
   background-color: #333;
+
+  @media (max-width: 639px) {
+    display:          block;
+    padding:          0;
+    background-color: #fff;
+  }
+}
+
+%Modal {
+  width:            100%;
+  max-width:        760px;
+  margin:           0 auto;
+  padding:          40px;
+  border-radius:    7px;
+  background-color: #fff;
+
+  @media (max-width: 639px) {
+    padding:       20px;
+    border-radius: 0;
+  }
 }

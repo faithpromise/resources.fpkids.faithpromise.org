@@ -1,15 +1,13 @@
 .CartWrapper {
   @extend %ModalWrapper;
-  background-color: #8d2dea;
+
+  @media(min-width: 640px) {
+    background-color: #8d2dea;
+  }
 }
 
 .Cart {
-  width:            100%;
-  max-width:        760px;
-  margin:           0 auto;
-  padding:          40px;
-  border-radius:    7px;
-  background-color: #fff;
+  @extend %Modal;
 }
 
 .Cart-title {
@@ -29,12 +27,19 @@
 }
 
 .Cart-list {
-  padding:    0;
-  border-top: 1px solid #e6e6e6;
-  list-style: none;
+  margin-bottom: 40px;
+  padding:       0;
+  border-top:    1px solid #e6e6e6;
+  list-style:    none;
 }
 
 .Cart-item {
   padding:       15px 0;
   border-bottom: 1px solid #e6e6e6;
+}
+
+.Cart-empty {
+  @media (max-width: 639px) {
+    padding-top: 20px;
+  }
 }
