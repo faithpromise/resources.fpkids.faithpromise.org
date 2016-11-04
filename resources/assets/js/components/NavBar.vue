@@ -11,9 +11,9 @@
         </router-link>
       </div>
 
-      <div class="NavBar-logo">
+      <router-link class="NavBar-logo" v-bind:to="{ name: 'products' }">
         <img class="NavBar-logoImage" src="/images/fpkids.svg">
-      </div>
+      </router-link>
 
       <div class="NavBar-checkout">
         <router-link class="NavBar-link" v-bind:to="{ name: 'checkout' }">
