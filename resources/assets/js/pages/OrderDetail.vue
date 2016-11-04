@@ -3,12 +3,25 @@
 
     <div class="Section-header">
       <h2 class="Section-heading">Order Details</h2>
-      <p class="Section-subtitle">Placed on {{ order.ordered_at_formatted }}</p>
+      <p class="Section-subtitle">Placed on {{ order.ordered_at_formatted }}. Estimated delivery date is {{ order.delivery_date_formatted }}.</p>
     </div>
 
-    <ul class="Orders-list">
-      <li class="Orders-item" v-for="item in order.items">
-        {{ item.product.name }} ({{ item.choices }}) x {{ item.quantity }}
+    <ul class="Cart-list">
+      <li class="Cart-item" v-for="item in order.items">
+
+        <div class="CartItem">
+          <div class="CartItem-imageWrap">
+            <div class="CartItem-image" v-bind:style="{ backgroundImage: item.product.image_url ? ('url(' + item.product.image_url + ')') : 'none' }"></div>
+          </div>
+          <div class="CartItem-info">
+            <router-link class="CartItem-name" v-bind:to="{ name: 'product', params: { id: item.product.id } }">{{ item.product.name }}</router-link>
+            <p class="CartItem-description" v-if="item.product.choices">{{ item.choices }}</p>
+          </div>
+          <div class="CartItem-qty">
+            {{ item.quantity }}
+          </div>
+        </div>
+
       </li>
     </ul>
 

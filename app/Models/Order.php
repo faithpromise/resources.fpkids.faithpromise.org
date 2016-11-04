@@ -66,7 +66,7 @@ class Order extends Model {
 
     public function getDeliveryDateFormattedAttribute()
     {
-        return $this->delivery_date->format('M j, Y');
+        return $this->delivery_date->format('D, M j');
     }
 
 }
