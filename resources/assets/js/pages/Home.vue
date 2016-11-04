@@ -2,14 +2,14 @@
 
   <div class="Layout-container">
 
-    <cart-preview></cart-preview>
+    <nav-bar></nav-bar>
     <router-view></router-view>
 
   </div>
 </template>
 <script>
 
-  import CartPreview from '../components/CartPreview.vue';
+  import NavBar from '../components/NavBar.vue';
 
   function hasParentClass(e, class_name) {
 
@@ -27,7 +27,7 @@
 
   export default {
     components: {
-      'cart-preview': CartPreview
+      'nav-bar': NavBar
     }
   }
 </script>
