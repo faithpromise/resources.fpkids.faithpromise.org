@@ -2,6 +2,8 @@ import Home from './pages/Home.vue';
 import Products from './pages/Products.vue';
 import ProductDetail from './pages/ProductDetail.vue';
 import Checkout from './pages/Checkout.vue';
+import Orders from './pages/Orders.vue';
+import OrderDetail from './pages/OrderDetail.vue';
 
 const routes = [
     {
@@ -24,6 +26,16 @@ const routes = [
                 name:      'checkout',
                 path:      '/checkout',
                 component: Checkout
+            },
+            {
+                name:      'my_orders',
+                path:      '/orders',
+                component: Orders
+            },
+            {
+                name:      'my_order',
+                path:      '/orders/:id',
+                component: OrderDetail
             }
         ]
     }
