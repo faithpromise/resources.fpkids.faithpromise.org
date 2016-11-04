@@ -42,6 +42,9 @@ const store = new Vuex.Store({
         REMOVE_FROM_CART:   function (state, index) {
             state.cart.splice(index, 1);
         },
+        EMPTY_CART:         function (state) {
+            state.cart = [];
+        },
         UPDATE_BACK_BUTTON: function (state, btn) {
             state.back_button = btn;
         },
