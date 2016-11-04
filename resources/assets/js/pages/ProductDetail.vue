@@ -11,8 +11,8 @@
       <h2 class="ProductAdded-title">Item Added to Cart</h2>
 
       <p>
-        <router-link class="Button" to="/products">Keep Shopping</router-link>
         <router-link class="Button Button--primary" v-bind:to="{ name: 'checkout' }">Checkout</router-link>
+        <router-link class="Button" to="/products">Keep Shopping</router-link>
       </p>
 
     </div>
@@ -84,10 +84,8 @@
 
     created: function () {
 
-      let self = this;
-
-      this.$http.get('/api/products/' + this.$route.params.id).then(function (data) {
-        self.$store.commit('SELECT_PRODUCT', data.data.data);
+      this.$http.get('/api/products/' + this.$route.params.id).then((data) => {
+        this.$store.commit('SELECT_PRODUCT', data.data.data);
         this.$store.commit("UPDATE_BACK_BUTTON", back_button);
       });
 
