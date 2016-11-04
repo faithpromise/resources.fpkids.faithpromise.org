@@ -15,7 +15,7 @@
           </div>
           <div class="CartItem-info">
             <router-link class="CartItem-name" v-bind:to="{ name: 'product', params: { id: item.product.id } }">{{ item.product.name }}</router-link>
-            <p class="CartItem-description" v-if="item.product.choices">{{ item.choices }}</p>
+            <p class="CartItem-description" v-if="item.choices">{{ item.choices }}</p>
           </div>
           <div class="CartItem-qty">
             {{ item.quantity }}
