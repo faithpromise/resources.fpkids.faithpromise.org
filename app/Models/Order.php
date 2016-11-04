@@ -16,7 +16,8 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Order extends Model {
 
-    protected $hidden = ['created_at', 'updated_at'];
+    protected $fillable = ['campus', 'email'];
+    protected $hidden = ['updated_at'];
 
     public function items()
     {

@@ -16,6 +16,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class OrderItem extends Model {
 
+    protected $fillable = ['order_id', 'product_id', 'choices', 'quantity'];
     protected $hidden = ['order_id', 'product_id', 'created_at', 'updated_at'];
 
     public function product()
