@@ -1,3 +1,4 @@
+$nav_bg_color: #8d2dea;
 $desktop_container_max_width: 1280px;
 $Container-h-padding: 40px;
 
@@ -13,12 +14,7 @@ $Container-h-padding: 40px;
 }
 
 %ModalWrapper {
-  display:          flex;
-  flex-direction:   column;
-  justify-content:  center;
-  min-height:       100vh;
-  padding:          100px 40px;
-  background-color: #333;
+  padding: 0 40px;
 
   @media (max-width: 639px) {
     display:          block;

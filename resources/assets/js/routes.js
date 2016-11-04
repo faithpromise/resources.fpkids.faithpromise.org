@@ -54,6 +54,10 @@ router.beforeEach((to, from, next) => {
     // console.log('to', to);
     // console.log('from', from);
 
+    // Set body class
+    document.body.classList.remove(from.name + '_page');
+    document.body.classList.add(to.name + '_page');
+
     next();
 
     let is_authorized = localStorage.getItem('email');

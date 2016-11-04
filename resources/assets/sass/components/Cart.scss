@@ -1,9 +1,5 @@
 .CartWrapper {
   @extend %ModalWrapper;
-
-  @media(min-width: 640px) {
-    background-color: #8d2dea;
-  }
 }
 
 .Cart {

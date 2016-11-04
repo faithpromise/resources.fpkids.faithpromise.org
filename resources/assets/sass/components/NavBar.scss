@@ -4,7 +4,7 @@
   top:              0;
   left:             0;
   width:            100%;
-  background-color: #8d2dea;
+  background-color: $nav_bg_color;
   color:            #fff;
 }
 
@@ -31,7 +31,7 @@
   width:       110px;
 }
 
-.NavBar-checkout {
+.NavBar-account {
   flex-shrink: 0;
   width:       110px;
   text-align:  right;
@@ -46,6 +46,28 @@
     color: #fff;
   }
 
+  &--account {
+    margin-right: 8px;
+  }
+
+}
+
+.Navbar-cartQty {
+  position:      absolute;
+  z-index:       2;
+  top:           -8px;
+  right:         -8px;
+  display:       block;
+  box-sizing:    content-box;
+  width:         20px;
+  height:        15px;
+  border:        1px solid #8d2dea;
+  line-height:   15px;
+  font-size:     12px;
+  border-radius: 8px;
+  background:    #ec652a;
+  text-align:    center;
+  overflow:      hidden;
 }
 
 .NavBar-icon {
@@ -60,7 +82,7 @@
 @media (max-width: 420px) {
 
   .NavBar-back,
-  .NavBar-checkout {
+  .NavBar-account {
     width: 50%;
   }
 
