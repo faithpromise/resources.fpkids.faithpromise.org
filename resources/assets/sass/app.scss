@@ -9,7 +9,7 @@
 
 body {
   margin:           0;
-  padding:          0;
+  padding:          0 0 100px;
   font-family:      'Open Sans', sans-serif;
   font-size:        16px;
   background-color: #f7f7f7;
@@ -22,8 +22,9 @@ body {
 
   @media(min-width: 640px) {
 
-    padding-top: 160px;
+    padding: 160px 40px 100px;
 
+    &.products_page,
     &.product_page {
       background-color: #333;
     }
@@ -32,8 +33,6 @@ body {
     }
   }
 }
-
-
 
 @import "include-media";
 @import "components/Product";
@@ -44,6 +43,11 @@ body {
 @import "components/NavBar";
 @import "components/CloseButton";
 @import "components/Form";
+@import "components/Orders";
+@import "components/OrderDetail";
+@import "components/Section";
+
+
 
 .Button {
   display:         inline-block;

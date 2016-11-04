@@ -1,17 +1,4 @@
-.ProductAdded {
-  @extend %Modal;
-  max-width: 690px;
-}
-
-.ProductAdded-title {
-  flex-grow: 1;
-  color:     #666;
-}
-
-.ProductWrapper {
-  @extend %ModalWrapper;
-}
-
+.ProductAdded,
 .ProductDetail {
   @extend %Modal;
   max-width: 690px;
@@ -23,6 +10,11 @@
   margin-bottom:  20px;
   padding-bottom: 20px;
   border-bottom:  1px solid #ccc;
+}
+
+.ProductAdded-title {
+  flex-grow: 1;
+  color:     #666;
 }
 
 .ProductDetail-imageWrap {

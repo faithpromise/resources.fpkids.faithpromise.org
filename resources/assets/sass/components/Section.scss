@@ -1,0 +1,18 @@
+.Section-heading {
+  margin:         0 0 20px;
+  text-transform: uppercase;
+  color:          #333;
+  font-weight:    600;
+  font-size:      28px;
+}
+
+.Section-header {
+  margin-bottom: 20px;
+  > .Section-heading {
+    margin-bottom: 0;
+  }
+}
+
+.Section-subtitle {
+  margin: 0;
+}

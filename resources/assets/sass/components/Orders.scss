@@ -1,0 +1,43 @@
+
+.Orders {
+  @extend %Modal;
+  max-width: 960px;
+}
+
+.Orders-list {
+  width:           100%;
+  border-top:      1px solid #ccc;
+  border-spacing:  0;
+  border-collapse: collapse;
+  font-size:       14px;
+}
+
+.Orders-list th {
+  text-align: left;
+}
+
+.Orders-list th,
+.Orders-list td {
+  padding:       13px 8px;
+  border-bottom: 1px solid #ccc;
+}
+
+.Orders-date {
+  white-space: nowrap;
+}
+
+.Orders-description {
+  color: #555;
+}
+
+@media (max-width: 549px) {
+  .Orders-description--desktop {
+    display: none;
+  }
+}
+
+@media (min-width: 550px) {
+  .Orders-description--mobile {
+    display: none;
+  }
+}
