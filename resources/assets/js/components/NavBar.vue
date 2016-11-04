@@ -15,12 +15,17 @@
         <img class="NavBar-logoImage" src="/images/fpkids.svg">
       </router-link>
 
-      <div class="NavBar-checkout">
+      <div class="NavBar-account">
+        <router-link class="NavBar-link NavBar-link--account" v-bind:to="{ name: 'my_orders' }">
+          <svg class="NavBar-icon">
+            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#user"></use>
+          </svg>
+        </router-link>
         <router-link class="NavBar-link" v-bind:to="{ name: 'checkout' }">
           <svg class="NavBar-icon">
             <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#cart"></use>
           </svg>
-          {{ cart.length }} Item{{ cart.length === 1 ? '' : 's' }}
+          <span class="Navbar-cartQty" v-if="cart.length">{{ cart.length }}</span>
         </router-link>
       </div>
 
