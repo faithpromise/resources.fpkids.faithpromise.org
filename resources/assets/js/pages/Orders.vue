@@ -1,7 +1,10 @@
 <template>
   <div class="Orders">
 
-    <h2 class="SectionHeading">Your Past Orders</h2>
+    <div class="Section-header">
+      <h2 class="Section-heading">Your Past Orders</h2>
+      <p class="Section-subtitle">Showings orders for {{ user_email}}</p>
+    </div>
 
     <table class="Orders-list">
       <thead>
@@ -63,6 +66,10 @@
         return items.slice(0, 2);
       }
     },
-    computed: {}
+    computed: {
+      user_email () {
+        return localStorage.getItem('fpkids_resources_email');
+      }
+    }
   }
 </script>
