@@ -1,6 +1,6 @@
 <template>
 
-  <div class="ProductWrapper">
+  <div>
 
     <div class="ProductAdded" v-if="is_added">
 
@@ -75,6 +75,7 @@
     </div>
 
   </div>
+
 </template>
 <script>
 

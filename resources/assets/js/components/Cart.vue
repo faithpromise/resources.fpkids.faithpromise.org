@@ -1,5 +1,6 @@
 <template>
-  <div class="CartWrapper">
+
+  <div>
 
     <div class="ProductAdded" v-if="order_placed">
 
@@ -15,9 +16,10 @@
 
       <div v-if="cart.length">
 
-        <h1 class="Cart-title">Your Cart</h1>
-
-        <p class="Cart-subtitle">Items will be delivered the Monday before the first weekend of each month.</p>
+        <div class="Section-header">
+          <h2 class="Section-heading">Your Cart</h2>
+          <p class="Section-subtitle">Items will be delivered the Monday before the first weekend of each month.</p>
+        </div>
 
         <ul class="Cart-list">
           <li class="Cart-item" v-for="(product, index) in cart">
@@ -43,8 +45,10 @@
           </li>
         </ul>
 
-        <h1 class="Cart-title">Complete Your Order</h1>
-        <p class="Cart-subtitle">Please provide your campus and email address.</p>
+        <div class="Section-header">
+          <h2 class="Section-heading">Complete Your Order</h2>
+          <p class="Section-subtitle">Please provide your campus and email address.</p>
+        </div>
 
         <div class="CheckoutForm-wrap">
           <form class="CheckoutForm" v-on:submit.prevent="submitOrder">
@@ -77,6 +81,7 @@
     </div>
 
   </div>
+
 </template>
 <script>
 

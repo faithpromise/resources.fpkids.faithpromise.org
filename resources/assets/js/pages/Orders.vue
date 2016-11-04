@@ -1,18 +1,43 @@
 <template>
-  <div class="Orders" style="padding-top: 100px">
-    <ul class="Orders-list">
-      <li class="Orders-item" v-for="order in orders">
+  <div class="Orders">
 
-        <router-link v-bind:to="{ name: 'my_order', params: { id: order.id } }">{{ order.created_at }} {{ order.items.length }} Items</router-link>
+    <h2 class="SectionHeading">Your Past Orders</h2>
 
-      </li>
-    </ul>
+    <table class="Orders-list">
+      <thead>
+        <tr>
+          <th>Ordered On</th>
+          <th>Est. Delivery</th>
+          <th>Items</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="Orders-item" v-for="order in orders">
+          <td class="Orders-date">
+            <router-link v-bind:to="{ name: 'my_order', params: { id: order.id } }">{{ order.ordered_at_formatted }}</router-link>
+          </td>
+          <td class="Orders-date">
+            {{ order.delivery_date_formatted }}
+          </td>
+          <td class="Orders-description Orders-description--desktop">
+            <span v-for="(item, index) in item_prose(order.items)">{{ item.product.name }}{{ order.items.length > (index+1) ? ',' : '' }}</span>
+            <span v-if="order.items.length > 2">and {{ order.items.length - 2 }} other items</span>
+          </td>
+          <td class="Orders-description Orders-description--mobile">
+            {{ order.items.length }} Items
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </template>
 <script>
 
+  const back_button = { label: 'Products', route: { name: 'products' } };
+
   export default {
-    created:  function () {
+
+    created: function () {
 
       let email = localStorage.getItem('fpkids_resources_email');
 
@@ -20,13 +45,24 @@
         this.orders = data.data.data;
       });
 
+      this.$store.commit("UPDATE_BACK_BUTTON", back_button);
+
     },
+
+    beforeDestroy() {
+      this.$store.commit("REMOVE_BACK_BUTTON", back_button);
+    },
+
     data:     function () {
       return {
         orders: null
       }
     },
-    methods:  {},
+    methods:  {
+      item_prose (items) {
+        return items.slice(0, 2);
+      }
+    },
     computed: {}
   }
 </script>
