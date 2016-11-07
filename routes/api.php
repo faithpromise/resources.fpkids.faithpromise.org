@@ -14,11 +14,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/products', 'ProductsController@index');
-Route::get('/products/{id}', 'ProductsController@show');
-Route::get('/orders', 'OrdersController@index');
-Route::get('/orders/{id}', 'OrdersController@show');
-Route::post('/orders', 'OrdersController@store');
+Route::group(['middleware' => 'jwt.auth'], function () {
+
+    Route::get('/products', 'ProductsController@index');
+    Route::get('/products/{id}', 'ProductsController@show');
+    Route::get('/orders', 'OrdersController@index');
+    Route::get('/orders/{id}', 'OrdersController@show');
+    Route::post('/orders', 'OrdersController@store');
+
+});
+
+Route::post('/login', 'JWTAuthController@login');
 
 Route::get('/user', function (Request $request) {
     return $request->user();

@@ -5,6 +5,14 @@ import Checkout from './pages/Checkout.vue';
 import Orders from './pages/Orders.vue';
 import OrderDetail from './pages/OrderDetail.vue';
 
+// Admin
+import Admin from './pages/Admin.vue';
+import AdminLogin from './pages/AdminLogin.vue';
+import AdminProducts from './pages/AdminProducts.vue';
+import AdminProductEdit from './pages/AdminProductEdit.vue';
+import AdminOrders from './pages/AdminOrders.vue';
+import auth from './auth';
+
 const routes = [
     {
         name:      'home',
@@ -38,6 +46,37 @@ const routes = [
                 component: OrderDetail
             }
         ]
+    },
+    {
+        name:      'admin',
+        path:      '/admin',
+        redirect:  '/admin/products',
+        component: Admin,
+        meta:      {
+            auth: true
+        },
+        children:  [
+            {
+                name:      'admin_products',
+                path:      '/admin/products',
+                component: AdminProducts
+            },
+            {
+                name:      'admin_product_edit',
+                path:      '/admin/products/:id',
+                component: AdminProductEdit
+            },
+            {
+                name:      'admin_orders',
+                path:      '/admin/orders',
+                component: AdminOrders
+            }
+        ]
+    },
+    {
+        name:      'login',
+        path:      '/admin/login',
+        component: AdminLogin
     }
 ];
 
@@ -49,6 +88,9 @@ const router = new VueRouter({
     }
 });
 
+// Initial check for authentication
+auth.checkAuth();
+
 router.beforeEach((to, from, next) => {
 
     // console.log('to', to);
@@ -58,15 +100,18 @@ router.beforeEach((to, from, next) => {
     document.body.classList.remove(from.name + '_page');
     document.body.classList.add(to.name + '_page');
 
-    next();
+    let is_protected = false;
 
-    let is_authorized = localStorage.getItem('email');
+    to.matched.forEach((route) => {
+        is_protected = route.meta.hasOwnProperty('auth') ? route.meta.auth : is_protected;
+    });
 
-    // if (!is_authorized && to.name !== 'login') {
-    //     next({ name: 'login' });
-    // } else {
-    //     next();
-    // }
+    if (is_protected && !auth.user.authenticated) {
+        console.log('Unauthorized. Redirecting to login.');
+        next({ name: 'login' });
+    } else {
+        next();
+    }
 
 });
 
