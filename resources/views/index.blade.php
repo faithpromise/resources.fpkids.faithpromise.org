@@ -40,6 +40,9 @@ $is_production = App::environment('production');
 
         <div class="Layout" id="app">
             <router-view></router-view>
+
+            <router-link v-bind:to="{ name: 'admin' }">Admin</router-link>
+
         </div>
 
         <script src="https://cdn.rawgit.com/taylorhakes/promise-polyfill/master/promise.js"></script>

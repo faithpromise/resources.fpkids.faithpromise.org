@@ -27,14 +27,13 @@
 
       if (this.products.length === 0) {
 
-        this.$http.get('/api/products').then(function (data) {
-
-          self.$store.commit('UPDATE_PRODUCTS', data.data.data);
-
-          self.is_loading = false;
-
-        });
-
+        this.$http.get('/api/products').then(
+                (data) => {
+                  self.$store.commit('UPDATE_PRODUCTS', data.data.data);
+                  self.is_loading = false;
+                },
+                (err) => {}
+        );
       }
 
     },

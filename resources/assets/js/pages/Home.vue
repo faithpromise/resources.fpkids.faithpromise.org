@@ -26,6 +26,12 @@
   }
 
   export default {
+    created () {
+      document.body.classList.add('main');
+    },
+    beforeDestroy () {
+      document.body.classList.remove('main');
+    },
     components: {
       'nav-bar': NavBar
     }
