@@ -38,6 +38,11 @@ export default {
         this.user.authenticated = false;
     },
 
+    authenticated() {
+        this.checkAuth();
+        return this.user.authenticated;
+    },
+
     checkAuth() {
         var jwt = localStorage.getItem('id_token');
 
