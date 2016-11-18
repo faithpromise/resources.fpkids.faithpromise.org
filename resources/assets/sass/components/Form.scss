@@ -8,10 +8,20 @@
   @extend .Form-horizontal;
 }
 
+.Form-group {
+  margin-bottom: 20px;
+}
+
+.Form-label {
+  display:       block;
+  margin-bottom: .5rem;
+  font-weight:   700;
+}
+
 .Form-control {
   height:           46px;
   width:            100%;
-  padding:          0 10px;
+  padding:          13px 10px;
   border:           1px solid #ccc;
   border-radius:    4px;
   font-size:        17px;
@@ -19,12 +29,59 @@
   color:            #555;
 }
 
+textarea.Form-control {
+  max-height: 160px; // optional but recommended
+  min-height: 38px;
+}
+
 .Form-horizontal {
   display:     flex;
   margin-left: -8px;
 
   > .Form-group {
-    padding-left: 8px;
+    margin-bottom: 0;
+    padding-left:  8px;
+  }
+}
+
+.Form-inputList {
+  list-style: none;
+
+  > li {
+    display:     flex;
+    align-items: center;
+    margin-top:  10px;
+    &:first-child {
+      margin-top: 0;
+    }
+
+    > .Form-deleteItem {
+      width:       20px;
+      margin-left: 10px;
+      text-align:  right;
+      flex-shrink: 1;
+    }
+  }
+}
+
+.Form-inputList--qty {
+  max-width: 180px;
+
+  .Form-control {
+    height:    32px;
+    font-size: 15px;
+  }
+
+}
+
+.Form-deleteIcon {
+  width:  18px;
+  height: 18px;
+  fill:   #7d7d7d;
+  cursor: pointer;
+
+  &:hover {
+    fill: #333;
   }
 }
 
