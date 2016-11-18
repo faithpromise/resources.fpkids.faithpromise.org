@@ -1,7 +1,11 @@
 <template>
   <div>
-    <router-link v-bind:to="{ name: 'admin_products' }">Products</router-link>
-    <router-link v-bind:to="{ name: 'admin_orders' }">Orders</router-link>
+    <div class="AdminNav">
+      <div class="AdminNav-container">
+        <router-link v-bind:to="{ name: 'admin_products' }">Products</router-link>
+        <router-link v-bind:to="{ name: 'admin_orders' }">Orders</router-link>
+      </div>
+    </div>
 
     <router-view></router-view>
   </div>

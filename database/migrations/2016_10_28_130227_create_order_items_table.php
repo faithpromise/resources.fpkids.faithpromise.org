@@ -17,6 +17,7 @@ class CreateOrderItemsTable extends Migration {
             $table->integer('product_id');
             $table->string('choices')->nullable();
             $table->string('quantity');
+            $table->dateTime('filled_at')->nullable();
             $table->timestamps();
         });
     }

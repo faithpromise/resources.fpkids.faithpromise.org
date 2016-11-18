@@ -62,6 +62,11 @@ const routes = [
                 component: AdminProducts
             },
             {
+                name:      'admin_product_new',
+                path:      '/admin/products/new',
+                component: AdminProductEdit
+            },
+            {
                 name:      'admin_product_edit',
                 path:      '/admin/products/:id',
                 component: AdminProductEdit
@@ -106,7 +111,7 @@ router.beforeEach((to, from, next) => {
         is_protected = route.meta.hasOwnProperty('auth') ? route.meta.auth : is_protected;
     });
 
-    if (is_protected && !auth.user.authenticated) {
+    if (is_protected && !auth.authenticated()) {
         console.log('Unauthorized. Redirecting to login.');
         next({ name: 'login' });
     } else {

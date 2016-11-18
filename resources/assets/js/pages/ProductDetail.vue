@@ -35,8 +35,8 @@
 
         <ul class="OptionList">
           <li class="OptionList-item"
-                  v-bind:class="{ 'is-selected': choice_1 === option }"
                   v-for="option in product.options[0].values"
+                  v-bind:class="{ 'is-selected': choice_1 === option }"
                   v-on:click="select_primary_option(option)">
             {{ option }}
           </li>
@@ -120,7 +120,7 @@
             return alert('Please select a ' + this.product.options[0].name);
           }
 
-          this.product.choices = this.choice_1;
+          this.product.choices = this.choice_1.label;
 
           // Add second option
           if (this.product.options.length > 1) {
@@ -160,8 +160,9 @@
       },
 
       secondary_option_available: function (option) {
-        return this.product.options.length > 1
-                && option.available_in.indexOf(this.choice_1) >= 0;
+        return this.choice_1
+                && this.product.options.length > 1
+                && option.available_in[this.choice_1.id];
       },
 
       reset: function () {
