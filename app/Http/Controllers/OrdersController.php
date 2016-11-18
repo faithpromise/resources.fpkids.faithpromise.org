@@ -36,6 +36,7 @@ class OrdersController extends Controller {
      */
     public function store(Request $request)
     {
+
         $order = Order::create($request->only('email', 'campus'));
 
         foreach ($request->get('items') as $item) {
