@@ -102,7 +102,11 @@
         </table>
       </div>
 
-      <button class="Button Button--primary" type="submit" v-bind:disabled="is_submit_disabled">{{ submit_text ? submit_text : 'Save' }}</button>
+      <div class="Form-group">
+        <button class="Button Button--primary" type="submit" v-bind:disabled="is_submit_disabled">{{ submit_text ? submit_text : 'Save' }}</button>
+        <router-link class="Button Button--cancel" v-bind:to="{ name: 'admin_products' }">cancel</router-link>
+      </div>
+
     </form>
   </div>
 </template>
