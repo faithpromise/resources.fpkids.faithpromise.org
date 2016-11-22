@@ -2,7 +2,10 @@
   "private": true,
   "scripts": {
     "prod": "gulp --production",
-    "dev": "gulp watch"
+    "dev": "gulp watch",
+    "clean_release": "rm -rf _release/*",
+    "copy_to_release": "cp -R public/ _release/public",
+    "release": "npm run clean_release && npm run copy_to_release"
   },
   "devDependencies": {
     "bootstrap-sass": "^3.3.7",
