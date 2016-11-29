@@ -1,5 +1,8 @@
 const elixir = require('laravel-elixir');
 
+var del  = require('del');
+var push = require('git-push');
+
 require('laravel-elixir-vue-2');
 
 /*
@@ -30,3 +33,36 @@ if (elixir.config.production) {
         version('css/app.css');
     })
 }
+
+gulp.task('clean_release', del.bind(null, ['_release/*', '!_release/.git'], { dot: true }));
+
+gulp.task('copy_release', ['clean_release'], () => {
+    gulp.src(
+        [
+            '**/*',
+            '!_release{,/**}',
+            '!node_modules{,/**}',
+            '!storage{,/**}',
+            '!public/storage',
+            '!public/web.config',
+            '!public/.htaccess',
+            '!tests{,/**}',
+            '!vendor{,/**}',
+            '!**/*.+(env|gitattributes|gitignore|md|DS_Store)',
+            '!composer.json',
+            '!gulpfile.js',
+            '!phpunit.xml',
+            '!yarn.lock'
+        ], { base: '.' }
+    )
+        .pipe(gulp.dest('./_release'));
+});
+
+gulp.task('deploy', (cb) => {
+    var remote = {
+        name: 'production', url: 'http://github.com/faithpromise/resources.fpkids.faithpromise.org', branch: 'release'
+    };
+    push('./_release', remote, cb)
+});
+
+// 'public/**/*.+(map|css|js|jpg|jpeg|png|gif|svg|php|txt|ico)',
