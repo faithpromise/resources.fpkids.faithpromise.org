@@ -13,7 +13,7 @@ require('laravel-elixir-vue-2');
  |
  */
 
-elixir(mix => {
+elixir(function (mix) {
     mix.sass('app.scss')
         .webpack('app.js', null, null, {
             externals: {
@@ -25,7 +25,7 @@ elixir(mix => {
 });
 
 if (elixir.config.production) {
-    elixir(mix => {
-        version('css/app.css');
-    })
+    elixir(function (mix) {
+        mix.version('css/app.css');
+    });
 }
