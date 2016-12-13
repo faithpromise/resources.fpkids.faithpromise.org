@@ -26,6 +26,6 @@ elixir(function (mix) {
 
 if (elixir.config.production) {
     elixir(function (mix) {
-        mix.version('css/app.css');
+        mix.version(['css/app.css', 'js/app.js']);
     });
 }
