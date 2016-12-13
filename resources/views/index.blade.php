@@ -1,7 +1,16 @@
 <?php
 
+use Illuminate\Support\Facades\App;
+
 $is_production = App::environment('production');
 
+$scripts = [
+        '//cdn.rawgit.com/taylorhakes/promise-polyfill/master/promise.js',
+        '//unpkg.com/axios/dist/axios' . ($is_production ? '.min.js' : '.js'),
+        '//cdnjs.cloudflare.com/ajax/libs/vue/2.1.4/vue' . ($is_production ? '.min.js' : '.js'),
+        '//unpkg.com/vue-router@2.1.1/dist/vue-router' . ($is_production ? '.min.js' : '.js'),
+        '//cdnjs.cloudflare.com/ajax/libs/vuex/2.0.0/vuex' . ($is_production ? '.min.js' : '.js')
+];
 
 ?><!DOCTYPE html>
 <html lang="en">
@@ -51,17 +60,10 @@ $is_production = App::environment('production');
             <router-view></router-view>
         </div>
 
-        <script src="https://cdn.rawgit.com/taylorhakes/promise-polyfill/master/promise.js"></script>
-        {{--<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.2/moment.min.js"></script>--}}
-        <script src="//cdnjs.cloudflare.com/ajax/libs/vue/2.0.3/vue.js"></script>
-        <script src="//cdnjs.cloudflare.com/ajax/libs/vue-router/2.0.1/vue-router.min.js"></script>
-        <script src="//cdnjs.cloudflare.com/ajax/libs/vue-resource/1.0.3/vue-resource.min.js"></script>
-        <script src="//cdnjs.cloudflare.com/ajax/libs/vuex/2.0.0/vuex.min.js"></script>
+        @foreach($scripts as $script)
+            <script src="{{ $script }}"></script>
+        @endforeach
 
-        @if ($is_production)
-            <script src="{{ elixir('js/app.js') }}"></script>
-        @else
-            <script src="/js/app.js"></script>
-        @endif
+        <script src="{{ $is_production ? elixir('/js/app.js') : '/js/app.js' }}"></script>
     </body>
 </html>

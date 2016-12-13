@@ -13,12 +13,15 @@ import AdminProductEdit from './pages/AdminProductEdit.vue';
 import AdminOrders from './pages/AdminOrders.vue';
 import auth from './auth';
 
+const FOO = { template: '<div><router-view></router-view></div>' };
+const FOOBAR = { template: '<div>Products</div>' };
+
 const routes = [
     {
         name:      'home',
         path:      '/',
         redirect:  'products',
-        component: Home,
+        component: FOO,
         children:  [
             {
                 name:      'products',
@@ -53,7 +56,7 @@ const routes = [
         redirect:  '/admin/products',
         component: Admin,
         meta:      {
-            auth: true
+            requires_login: true
         },
         children:  [
             {
@@ -93,8 +96,6 @@ const router = new VueRouter({
     }
 });
 
-// Initial check for authentication
-auth.checkAuth();
 
 router.beforeEach((to, from, next) => {
 
@@ -105,14 +106,17 @@ router.beforeEach((to, from, next) => {
     document.body.classList.remove(from.name + '_page');
     document.body.classList.add(to.name + '_page');
 
-    let is_protected = false;
+    // Check login
+    let requires_login = false;
 
     to.matched.forEach((route) => {
-        is_protected = route.meta.hasOwnProperty('auth') ? route.meta.auth : is_protected;
+        requires_login = route.meta.hasOwnProperty('requires_login') ? route.meta.requires_login : requires_login;
     });
 
-    if (is_protected && !auth.authenticated()) {
-        console.log('Unauthorized. Redirecting to login.');
+    // Login page does not require login
+    requires_login = to.name === 'login' ? false : requires_login;
+
+    if (requires_login && !auth.is_authenticated()) {
         next({ name: 'login' });
     } else {
         next();
