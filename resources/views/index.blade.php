@@ -64,6 +64,6 @@ $scripts = [
             <script src="{{ $script }}"></script>
         @endforeach
 
-        <script src="{{ $is_production ? elixir('/js/app.js') : '/js/app.js' }}"></script>
+        <script src="{{ $is_production ? elixir('js/app.js') : '/js/app.js' }}"></script>
     </body>
 </html>
