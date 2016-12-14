@@ -13,15 +13,12 @@ import AdminProductEdit from './pages/AdminProductEdit.vue';
 import AdminOrders from './pages/AdminOrders.vue';
 import auth from './auth';
 
-const FOO = { template: '<div><router-view></router-view></div>' };
-const FOOBAR = { template: '<div>Products</div>' };
-
 const routes = [
     {
         name:      'home',
         path:      '/',
         redirect:  'products',
-        component: FOO,
+        component: Home,
         children:  [
             {
                 name:      'products',
