@@ -21,11 +21,12 @@ elixir(function (mix) {
                 'vuex':         'Vuex',
                 'vue-resource': 'VueResource'
             }
-        });
+        })
+        .version(['css/app.css', 'js/app.js']);
 });
 
-if (elixir.config.production) {
-    elixir(function (mix) {
-        mix.version(['css/app.css', 'js/app.js']);
-    });
-}
+// if (elixir.config.production) {
+//     elixir(function (mix) {
+//         mix.version(['css/app.css', 'js/app.js']);
+//     });
+// }
