@@ -1,0 +1,113 @@
+$Login-font-size: $font-size;
+
+@import "LoginForm";
+
+.Login-logo {
+  margin:    0 auto;
+  max-width: 16.875em;
+}
+
+.Login-title {
+  @extend .h4;
+  margin-top: 0;
+}
+
+.Login-error {
+  color:      tomato;
+  font-size:  14px;
+  opacity:    0;
+  transition: opacity .5s ease;
+
+  &.has-error {
+    opacity: 1;
+  }
+}
+
+// 761px and up
+@media (min-width: 47.5625em) {
+
+  .Login {
+    display:     flex;
+    align-items: center;
+    height:      100vh;
+    overflow:    hidden;
+  }
+
+  .Login-brand {
+    display:          flex;
+    flex-direction:   column;
+    justify-content:  center;
+    height:           100vh;
+    width:            50%;
+    padding:          1em;
+    background-color: $color-gray-darkest;
+    color:            #fff;
+  }
+
+  .Login-name {
+    text-align:     center;
+    font-size:      1.5625em;
+    font-weight:    normal;
+    text-transform: uppercase;
+    color:          inherit;
+  }
+
+  .Login-logo {
+    fill: #fff;
+  }
+
+  .Login-body {
+    width:     100%;
+    max-width: 21em;
+    padding:   0 0 0 4em;
+  }
+
+  .Login-title {
+    font-weight: normal;
+  }
+
+}
+
+// 760px and below
+@media (max-width: 47.5em) {
+
+  .Login {
+    display:        flex;
+    flex-direction: column;
+    height:         100vh;
+  }
+
+  .Login-brand {
+    display:          flex;
+    flex-direction:   column;
+    justify-content:  center;
+    height:           50%;
+    padding:          1em;
+    background-color: $color-gray-darkest;
+    color:            #fff;
+  }
+
+  .Login-name {
+    text-align:     center;
+    font-size:      1.5625em;
+    font-weight:    normal;
+    text-transform: uppercase;
+    color:          inherit;
+  }
+
+  .Login-logo {
+    fill: #fff;
+  }
+
+  .Login-body {
+    width:     100%;
+    max-width: 21em;
+    margin:    0 auto;
+    padding:   3em 1em;
+  }
+
+  .Login-title {
+    display: none;
+  }
+
+}

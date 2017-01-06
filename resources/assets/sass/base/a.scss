@@ -1,0 +1,18 @@
+a,
+.link {
+  color:           $anchor-color;
+  text-decoration: none;
+
+  //&:visited {
+  //  color: $anchor-color-visited;
+  //}
+
+  &:hover {
+    text-decoration: underline;
+    color:           $anchor-color-hover;
+  }
+
+  //&:active {
+  //  color: $anchor-color-active;
+  //}
+}

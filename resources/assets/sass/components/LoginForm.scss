@@ -1,0 +1,53 @@
+
+.LoginForm-group {
+  position:      relative;
+  margin-bottom: 0.5em;
+  //border-bottom: 2px solid #e6e7e8;
+}
+
+.LoginForm-control {
+  width:               100%;
+  margin-bottom:       -2px;
+  padding:             1em .3em .5em;
+  border:              0 solid #e6e7e8;
+  border-bottom-width: 2px;
+  color:               #444;
+
+  &:focus {
+    border-bottom-color: #08c;
+    outline:             none !important;
+  }
+}
+
+.LoginForm-submit {
+  margin-top:       2em;
+  padding:          1em 2.2em;
+  border:           3px solid #08c;
+  border-radius:    2em;
+  background-color: #fff;
+  font-weight:      600;
+  text-transform:   uppercase;
+  color:            #08c;
+
+  &:hover,
+  &:focus {
+    outline:          none !important;
+    background-color: #08c;
+    color:            #fff;
+    cursor:           pointer;
+  }
+
+}
+
+.LoginForm-icon {
+  position: absolute;
+  right:    0;
+  bottom:   0.4em;
+  height:   1.375em;
+  width:    1.375em;
+  fill:     #d1d3d4;
+}
+
+.LoginForm-icon--password {
+  cursor: pointer;
+}
