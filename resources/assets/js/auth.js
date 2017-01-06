@@ -6,8 +6,8 @@ import authService from './api/auth.service';
 
 const LOGIN_REDIRECT_TO = '/admin/products';
 
-let logout_timer         = null;
-let logout_warning_timer = null;
+let logout_timer  = null;
+let refresh_timer = null;
 
 updateAuthStatus();
 set_timers();
@@ -37,24 +37,24 @@ function get_seconds_until_logout() {
     return Math.round(Math.max(0, seconds_remaining));
 }
 
-function get_seconds_until_warning() {
+function get_seconds_until_refresh() {
     return Math.max(get_seconds_until_logout() - 180, 0);
 }
 
 function should_show_logout_warning() {
-    return is_authenticated() && get_seconds_until_warning() < 2; // Buffer it a bit in case timeout is off
+    return is_authenticated() && get_seconds_until_refresh() < 2; // Buffer it a bit in case timeout is off
 }
 
 function set_timers() {
 
     let seconds_remaining_until_logout  = get_seconds_until_logout();
-    let seconds_remaining_until_warning = get_seconds_until_warning();
+    let seconds_remaining_until_warning = get_seconds_until_refresh();
 
     console.log('seconds_remaining_until_logout', seconds_remaining_until_logout);
     console.log('seconds_remaining_until_warning', seconds_remaining_until_warning);
 
     clearTimeout(logout_timer);
-    clearTimeout(logout_warning_timer);
+    clearTimeout(refresh_timer);
 
     if (seconds_remaining_until_logout) {
 
@@ -62,12 +62,20 @@ function set_timers() {
             logout();
         }, seconds_remaining_until_logout * 1000);
 
-        logout_warning_timer = setTimeout(() => {
+        refresh_timer = setTimeout(() => {
             updateAuthStatus();
         }, seconds_remaining_until_warning * 1000);
 
     }
 
+}
+
+function refresh() {
+    axios.get('/api/login/refresh').then((result) => {
+        localStorage.setItem('id_token', result.data.token);
+        updateAuthStatus();
+        set_timers();
+    });
 }
 
 function logout() {
@@ -84,23 +92,18 @@ export default {
     is_authenticated,
     logout,
 
-    login(context, creds, redirect = LOGIN_REDIRECT_TO) {
+    login(credentials, redirect = LOGIN_REDIRECT_TO) {
 
-        authService.login(creds).then(
-            (result) => {
+        return authService.login(credentials).then((result) => {
 
-                localStorage.setItem('id_token', result.data.token);
+            localStorage.setItem('id_token', result.data.token);
 
-                updateAuthStatus();
-                set_timers();
+            updateAuthStatus();
+            set_timers();
 
-                if (redirect) router.push(redirect);
+            if (redirect) router.push(redirect);
 
-            },
-            (err) => {
-                context.error = err.body.error;
-            }
-        );
+        });
     }
 
 }

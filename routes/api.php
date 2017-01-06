@@ -34,6 +34,7 @@ Route::put('/order-items/{id}', 'PackagingController@update');
 
 // Authentication
 Route::post('/login', 'JWTAuthController@login');
+Route::get('/login/refresh', 'JWTAuthController@refresh');
 
 Route::get('/user', function (Request $request) {
     return $request->user();
