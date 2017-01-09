@@ -1,16 +1,16 @@
-import Home from './pages/Home.vue';
-import Products from './pages/Products.vue';
-import ProductDetail from './pages/ProductDetail.vue';
-import Checkout from './pages/Checkout.vue';
-import Orders from './pages/Orders.vue';
-import OrderDetail from './pages/OrderDetail.vue';
+import home from './route_components/route-home.vue';
+import products from './route_components/route-products.vue';
+import productDetail from './route_components/route-product-detail.vue';
+import checkout from './route_components/route-checkout.vue';
+import orders from './route_components/route-orders.vue';
+import orderDetail from './route_components/route-order-detail.vue';
 
 // Admin
-import Admin from './pages/Admin.vue';
-import AdminLogin from './pages/AdminLogin.vue';
-import AdminProducts from './pages/AdminProducts.vue';
-import AdminProductEdit from './pages/AdminProductEdit.vue';
-import AdminOrders from './pages/AdminOrders.vue';
+import admin from './route_components/route-admin.vue';
+import adminLogin from './route_components/route-admin-login.vue';
+import adminProducts from './route_components/route-admin-products.vue';
+import adminProductEdit from './route_components/route-admin-product-edit.vue';
+import adminOrders from './route_components/route-admin-orders.vue';
 import auth from './auth';
 
 const routes = [
@@ -18,32 +18,32 @@ const routes = [
         name:      'home',
         path:      '/',
         redirect:  'products',
-        component: Home,
+        component: home,
         children:  [
             {
                 name:      'products',
                 path:      '/products',
-                component: Products
+                component: products
             },
             {
                 name:      'product',
                 path:      '/products/:id',
-                component: ProductDetail
+                component: productDetail
             },
             {
                 name:      'checkout',
                 path:      '/checkout',
-                component: Checkout
+                component: checkout
             },
             {
                 name:      'my_orders',
                 path:      '/orders',
-                component: Orders
+                component: orders
             },
             {
                 name:      'my_order',
                 path:      '/orders/:id',
-                component: OrderDetail
+                component: orderDetail
             }
         ]
     },
@@ -51,7 +51,7 @@ const routes = [
         name:      'admin',
         path:      '/admin',
         redirect:  '/admin/products',
-        component: Admin,
+        component: admin,
         meta:      {
             requires_login: true
         },
@@ -59,29 +59,29 @@ const routes = [
             {
                 name:      'admin_products',
                 path:      '/admin/products',
-                component: AdminProducts
+                component: adminProducts
             },
             {
                 name:      'admin_product_new',
                 path:      '/admin/products/new',
-                component: AdminProductEdit
+                component: adminProductEdit
             },
             {
                 name:      'admin_product_edit',
                 path:      '/admin/products/:id',
-                component: AdminProductEdit
+                component: adminProductEdit
             },
             {
                 name:      'admin_orders',
                 path:      '/admin/orders',
-                component: AdminOrders
+                component: adminOrders
             }
         ]
     },
     {
         name:      'login',
         path:      '/admin/login',
-        component: AdminLogin
+        component: adminLogin
     }
 ];
 
