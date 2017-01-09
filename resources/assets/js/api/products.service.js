@@ -12,9 +12,9 @@ export default {
 
     save(product) {
         if (product.id) {
-            return axios.post('/api/products', product);
+            return axios.put('/api/products/' + product.id, product);
         }
-        return axios.put('/api/products/' + product.id, product);
+        return axios.post('/api/products', product);
     },
 
     upload_image(formData) {
