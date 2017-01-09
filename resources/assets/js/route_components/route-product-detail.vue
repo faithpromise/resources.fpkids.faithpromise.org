@@ -79,104 +79,106 @@
 </template>
 <script>
 
-  const back_button = { label: 'Products', route: { name: 'products' } };
+    import productsService from '../api/products.service';
 
-  export default {
+    const back_button = { label: 'Products', route: { name: 'products' } };
 
-    created: function () {
+    export default {
 
-      this.$http.get('/api/products/' + this.$route.params.id).then((data) => {
-        this.$store.commit('SELECT_PRODUCT', data.data.data);
-        this.$store.commit("UPDATE_BACK_BUTTON", back_button);
-      });
+        created: function () {
 
-    },
+            productsService.find(this.$route.params.id).then((result) => {
+                this.$store.commit('SELECT_PRODUCT', result.data.data);
+                this.$store.commit("UPDATE_BACK_BUTTON", back_button);
+            });
 
-    beforeDestroy() {
-      this.$store.commit('DESELECT_PRODUCT');
-      this.$store.commit("REMOVE_BACK_BUTTON", back_button);
-    },
+        },
 
-    data: function () {
-      return {
-        quantity: 0,
-        options:  {},
-        choice_1: null,
-        choice_2: null,
-        is_added: false
-      }
-    },
+        beforeDestroy() {
+            this.$store.commit('DESELECT_PRODUCT');
+            this.$store.commit("REMOVE_BACK_BUTTON", back_button);
+        },
 
-    methods: {
-      add_to_cart: function () {
-
-        // Add quantity
-        this.product.quantity = this.quantity;
-
-        if (this.product.options && this.product.options.length > 0) {
-
-          // Add first option
-          if (!this.choice_1) {
-            return alert('Please select a ' + this.product.options[0].name);
-          }
-
-          this.product.choices = this.choice_1.label;
-
-          // Add second option
-          if (this.product.options.length > 1) {
-            if (!this.choice_2) {
-              return alert('Please select a ' + this.product.options[1].name);
+        data: function () {
+            return {
+                quantity: 0,
+                options:  {},
+                choice_1: null,
+                choice_2: null,
+                is_added: false
             }
-            this.product.choices += ' / ' + this.choice_2;
-          }
+        },
 
+        methods: {
+            add_to_cart: function () {
+
+                // Add quantity
+                this.product.quantity = this.quantity;
+
+                if (this.product.options && this.product.options.length > 0) {
+
+                    // Add first option
+                    if (!this.choice_1) {
+                        return alert('Please select a ' + this.product.options[0].name);
+                    }
+
+                    this.product.choices = this.choice_1.label;
+
+                    // Add second option
+                    if (this.product.options.length > 1) {
+                        if (!this.choice_2) {
+                            return alert('Please select a ' + this.product.options[1].name);
+                        }
+                        this.product.choices += ' / ' + this.choice_2;
+                    }
+
+                }
+
+                if (this.quantity <= 0) {
+                    return alert('Please select a quantity');
+                }
+
+                this.$store.commit('ADD_TO_CART', this.product);
+                this.is_added = true;
+
+            },
+
+            set_quantity: function (qty) {
+                this.quantity = qty;
+            },
+
+            select_primary_option(option) {
+                this.choice_1 = option;
+                // Reset secondary option
+                if (this.product.options.length > 1) {
+                    this.choice_2 = null;
+                }
+            },
+
+            select_secondary_option(option) {
+                if (this.secondary_option_available(option)) {
+                    this.choice_2 = option.label;
+                }
+            },
+
+            secondary_option_available: function (option) {
+                return this.choice_1
+                    && this.product.options.length > 1
+                    && option.available_in[this.choice_1.id];
+            },
+
+            reset: function () {
+                this.quantity = 0;
+                this.choice_1 = null;
+                this.choice_2 = null;
+                this.is_added = false;
+            }
+        },
+
+        computed: {
+            product: function () {
+                return this.$store.state.selected_product;
+            }
         }
-
-        if (this.quantity <= 0) {
-          return alert('Please select a quantity');
-        }
-
-        this.$store.commit('ADD_TO_CART', this.product);
-        this.is_added = true;
-
-      },
-
-      set_quantity: function (qty) {
-        this.quantity = qty;
-      },
-
-      select_primary_option(option) {
-        this.choice_1 = option;
-        // Reset secondary option
-        if (this.product.options.length > 1) {
-          this.choice_2 = null;
-        }
-      },
-
-      select_secondary_option(option) {
-        if (this.secondary_option_available(option)) {
-          this.choice_2 = option.label;
-        }
-      },
-
-      secondary_option_available: function (option) {
-        return this.choice_1
-                && this.product.options.length > 1
-                && option.available_in[this.choice_1.id];
-      },
-
-      reset: function () {
-        this.quantity = 0;
-        this.choice_1 = null;
-        this.choice_2 = null;
-        this.is_added = false;
-      }
-    },
-
-    computed: {
-      product: function () {
-        return this.$store.state.selected_product;
-      }
     }
-  }
 </script>

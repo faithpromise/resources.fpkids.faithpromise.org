@@ -23,27 +23,28 @@
 </template>
 <script>
 
-  export default {
-    created:  function () {
+    import productsService from '../api/products.service';
 
-      if (this.products.length === 0) {
+    export default {
 
-        this.$http.get('/api/products').then(
-                (data) => {
-                  this.products   = data.data.data;
-                  this.is_loading = false;
-                },
-                (err) => {});
-      }
+        created: function () {
 
-    },
-    data:     function () {
-      return {
-        products:   [],
-        is_loading: true
-      }
-    },
-    methods:  {},
-    computed: {}
-  }
+            if (this.products.length === 0) {
+
+                productsService.all().then((result) => {
+                        this.products   = result.data.data;
+                        this.is_loading = false;
+                    }
+                );
+            }
+
+        },
+
+        data: function () {
+            return {
+                products:   [],
+                is_loading: true
+            }
+        }
+    }
 </script>

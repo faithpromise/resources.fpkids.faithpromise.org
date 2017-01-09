@@ -121,6 +121,7 @@
 
     import Vue from 'vue';
     import autosize from '../directives/autosize';
+    import productsService from '../api/products.service';
 
     export default {
 
@@ -132,11 +133,9 @@
 
             // If editing, load the product
             if (this.$route.params.hasOwnProperty('id')) {
-                this.$http.get('/api/products/' + this.$route.params.id).then(
-                    (data) => {
-                        this.product = data.data.data;
-                    },
-                    (err) => {}
+                productsService.find(this.$route.params.id).then((result) => {
+                        this.product = result.data.data;
+                    }
                 );
             }
 
@@ -189,16 +188,14 @@
 
                 formData.append('image', file, file.name);
 
-                this.$http.post('/api/product-images', formData).then(
-                    function (data) {
-                        this.product.image = data.data.data;
-                        this.enable_submit();
-                    },
-                    function () {
-                        alert('Error uploading image');
+                productsService.upload_image(formData).then((result) => {
+                        this.product.image = result.data.data;
                         this.enable_submit();
                     }
-                );
+                ).catch(() => {
+                    alert('Error uploading image');
+                    this.enable_submit();
+                });
 
             },
 
@@ -220,14 +217,10 @@
                     return alert('Unable to save product. Please try again.');
                 }
 
-                if (this.product.id) {
-                    return this.$http.put('/api/products/' + this.product.id, this.product).then(() => {
-                        this.notification = 'Product Updated';
-                    });
-                }
+                let notification = this.product.id ? 'Product Updated' : 'Product Added';
 
-                this.$http.post('/api/products', this.product).then(() => {
-                    this.notification = 'Product Added';
+                productsService.save(this.product).then(() => {
+                    this.notification = notification;
                 });
 
             },

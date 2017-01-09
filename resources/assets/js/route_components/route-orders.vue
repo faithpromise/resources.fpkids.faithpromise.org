@@ -25,7 +25,7 @@
               {{ order.delivery_date_formatted }}
             </td>
             <td class="Orders-description Orders-description--desktop">
-              <span v-for="(item, index) in item_prose(order.items)">{{ item.product.name }}{{ order.items.length > (index+1) ? ',' : '' }}</span>
+              <span v-for="(item, index) in item_prose(order.items)">{{ item.product.name }}{{ order.items.length > (index+1) ? ', ' : '' }}</span>
               <span v-if="order.items.length > 2">and {{ order.items.length - 2 }} other items</span>
             </td>
             <td class="Orders-description Orders-description--mobile">
@@ -44,40 +44,48 @@
 </template>
 <script>
 
-  const back_button = { label: 'Products', route: { name: 'products' } };
+    import ordersService from '../api/orders.service';
 
-  export default {
+    const back_button = { label: 'Products', route: { name: 'products' } };
 
-    created: function () {
+    export default {
 
-      let email = localStorage.getItem('fpkids_resources_email');
+        created: function () {
 
-      this.$http.get('/api/orders?email=' + email).then(function (data) {
-        this.orders = data.data.data;
-      });
+            let email = localStorage.getItem('fpkids_resources_email');
 
-      this.$store.commit("UPDATE_BACK_BUTTON", back_button);
+            ordersService.byEmail(email).then((data) => {
+                this.orders = data.data.data;
+            });
 
-    },
+            this.$store.commit("UPDATE_BACK_BUTTON", back_button);
 
-    beforeDestroy() {
-      this.$store.commit("REMOVE_BACK_BUTTON", back_button);
-    },
+        },
 
-    data:     function () {
-      return {
-        orders: null
-      }
-    },
-    methods:  {
-      item_prose (items) {
-        return items.slice(0, 2);
-      }
-    },
-    computed: {
-      user_email () {
-        return localStorage.getItem('fpkids_resources_email');
-      }
+        beforeDestroy() {
+            this.$store.commit("REMOVE_BACK_BUTTON", back_button);
+        },
+
+        data: function () {
+            return {
+                orders: null
+            }
+        },
+
+        computed: {
+
+            user_email () {
+                return localStorage.getItem('fpkids_resources_email');
+            }
+
+        },
+
+        methods: {
+
+            item_prose (items) {
+                return items.slice(0, 2);
+            }
+
+        }
     }
-  }
 </script>

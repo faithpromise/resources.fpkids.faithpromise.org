@@ -20,39 +20,42 @@
 </template>
 <script>
 
-  export default {
-    created:  function () {
+    import productsService from '../api/products.service';
 
-      let self = this;
+    export default {
 
-      if (this.products.length === 0) {
+        created() {
 
-        this.$http.get('/api/products').then(
-                function (data) {
-                  self.$store.commit('UPDATE_PRODUCTS', data.data.data);
-                },
-                function (err) {
-                  // TODO: handle error
-                }
-        );
+            if (this.products.length === 0) {
 
-      }
+                productsService.all().then((result) => {
+                    this.$store.commit('UPDATE_PRODUCTS', result.data.data);
+                });
 
-    },
-    data:     function () {
-      return {
-        is_loading: true
-      }
-    },
-    methods:  {
-      add_to_cart: function (product) {
-        this.$store.commit('ADD_TO_CART', product);
-      }
-    },
-    computed: {
-      products: function () {
-        return this.$store.state.products;
-      }
+            }
+
+        },
+
+        data() {
+            return {
+                is_loading: true
+            }
+        },
+
+        methods:  {
+
+            add_to_cart: function (product) {
+                this.$store.commit('ADD_TO_CART', product);
+            }
+
+        },
+
+        computed: {
+
+            products: function () {
+                return this.$store.state.products;
+            }
+
+        }
     }
-  }
 </script>

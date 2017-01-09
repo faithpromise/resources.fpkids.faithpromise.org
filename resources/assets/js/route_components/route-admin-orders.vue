@@ -46,64 +46,63 @@
 </template>
 <script>
 
-  export default {
-    created: function () {
+    import ordersService from '../api/orders.service';
 
-      this.$http.get('/api/packaging').then(
-              (data) => {
-                this.campuses   = data.data.data;
+    export default {
+
+        created: function () {
+
+            ordersService.packaging().then((result) => {
+                this.campuses   = result.data.data;
                 this.is_loading = false;
-              },
-              (err) => {});
+            });
 
-    },
-    data:    function () {
-      return {
-        campuses:          [],
-        is_loading:        true,
-        is_filled_visible: true
-      }
-    },
+        },
 
-    methods:  {
+        data: function () {
+            return {
+                campuses:          [],
+                is_loading:        true,
+                is_filled_visible: true
+            }
+        },
 
-      toggle_filled_visibility() {
-        this.is_filled_visible = !this.is_filled_visible;
-      },
+        methods:  {
 
-      filtered_items(items) {
+            toggle_filled_visibility() {
+                this.is_filled_visible = !this.is_filled_visible;
+            },
 
-        if (this.is_filled_visible) {
-          return items;
-        }
+            filtered_items(items) {
 
-        return items.filter((item)=> {
-          return !item.filled_at;
-        });
-
-      },
-
-      mark_filled(item) {
-
-        let orig_filled_at = item.filled_at;
-
-        if (orig_filled_at && !confirm('Are you sure?')) {
-          return;
-        }
-
-        item.filled_at = orig_filled_at ? null : new Date().toISOString().substring(0, 19).replace('T', ' ');
-
-        this.$http.put('/api/order-items/' + item.id, { 'filled_at': item.filled_at }).then(
-                () => {},
-                (err) => {
-                  item.filled_at = orig_filled_at;
-                  alert('An error occurred. Unable to mark item filled/unfilled.');
+                if (this.is_filled_visible) {
+                    return items;
                 }
-        );
 
-      }
+                return items.filter((item) => {
+                    return !item.filled_at;
+                });
 
-    },
-    computed: {}
-  }
+            },
+
+            mark_filled(item) {
+
+                let orig_filled_at = item.filled_at;
+
+                if (orig_filled_at && !confirm('Are you sure?')) {
+                    return;
+                }
+
+                item.filled_at = orig_filled_at ? null : new Date().toISOString().substring(0, 19).replace('T', ' ');
+
+                ordersService.update({ 'id': item.id, 'filled_at': item.filled_at }).catch(() => {
+                    item.filled_at = orig_filled_at;
+                    alert('An error occurred. Unable to mark item filled/unfilled.');
+                });
+
+            }
+
+        }
+
+    }
 </script>

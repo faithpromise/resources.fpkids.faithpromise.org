@@ -29,29 +29,31 @@
 </template>
 <script>
 
-  const back_button = { label: 'Orders', route: { name: 'my_orders' } };
+    import ordersService from '../api/orders.service';
 
-  export default {
-    created:  function () {
+    const back_button = { label: 'Orders', route: { name: 'my_orders' } };
 
-      this.$http.get('/api/orders/' + this.$route.params.id).then((data) => {
-        this.order = data.data.data;
-      });
+    export default {
+        created: function () {
 
-      this.$store.commit("UPDATE_BACK_BUTTON", back_button);
+            ordersService.find(this.$route.params.id).then((result) => {
+                this.order = result.data.data;
+            });
 
-    },
+            this.$store.commit("UPDATE_BACK_BUTTON", back_button);
 
-    beforeDestroy() {
-      this.$store.commit("REMOVE_BACK_BUTTON", back_button);
-    },
+        },
 
-    data:     function () {
-      return {
-        order: null
-      }
-    },
-    methods:  {},
-    computed: {}
-  }
+        beforeDestroy() {
+            this.$store.commit("REMOVE_BACK_BUTTON", back_button);
+        },
+
+        data:     function () {
+            return {
+                order: null
+            }
+        },
+        methods:  {},
+        computed: {}
+    }
 </script>
