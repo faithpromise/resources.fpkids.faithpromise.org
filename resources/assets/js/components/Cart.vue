@@ -59,7 +59,7 @@
                 <option value="Blount">Blount</option>
                 <option value="Campbell">Campbell</option>
                 <option value="North Knox">North Knox</option>
-                <option value="">Pellissippi</option>
+                <option value="Pellissippi">Pellissippi</option>
               </select>
             </div>
             <div class="Form-group CheckoutForm--email">
