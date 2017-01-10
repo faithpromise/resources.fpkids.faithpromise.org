@@ -38,7 +38,7 @@
                   v-for="option in product.options[0].values"
                   v-bind:class="{ 'is-selected': choice_1 === option }"
                   v-on:click="select_primary_option(option)">
-            {{ option }}
+            {{ option.label }}
           </li>
         </ul>
 
