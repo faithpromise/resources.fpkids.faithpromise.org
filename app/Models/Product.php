@@ -25,7 +25,7 @@ class Product extends Model {
 
     const TEMP_IMAGE_DIR = 'temp';
     const IMAGE_DIR = 'public/products';
-    const IMAGE_URL = '/storage/products/%s?v=%s';
+    const IMAGE_URL = '/storage/app/public/products/%s?v=%s';
 
     protected $guarded = [];
     protected $hidden = ['category_id', 'created_at', 'updated_at', 'deleted_at'];
