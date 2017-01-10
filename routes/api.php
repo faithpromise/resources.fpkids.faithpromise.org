@@ -29,6 +29,7 @@ Route::post('/orders', 'OrdersController@store');
 // Admin products
 Route::post('/products', 'ProductsController@store');
 Route::put('/products/{id}', 'ProductsController@update');
+Route::delete('/products/{id}', 'ProductsController@destroy');
 Route::get('/packaging', 'PackagingController@index');
 Route::put('/order-items/{id}', 'PackagingController@update');
 

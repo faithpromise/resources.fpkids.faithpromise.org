@@ -176,6 +176,18 @@
   max-width: 480px;
 }
 
+.ProductForm-delete {
+  display:    inline-block;
+  margin-top: 4em;
+  font-size:  .875em;
+  color:      #cc001d;
+  cursor:     pointer;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
 .ProductForm-image {
   width:            150px;
   height:           150px;

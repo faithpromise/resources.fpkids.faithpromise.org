@@ -17,6 +17,10 @@ export default {
         return axios.post('/api/products', product);
     },
 
+    delete(id) {
+        return axios.delete('/api/products/' + id);
+    },
+
     upload_image(formData) {
         return axios.post('/api/product-images', formData);
     }

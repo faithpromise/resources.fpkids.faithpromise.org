@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Storage;
 
 
@@ -22,6 +23,8 @@ use Illuminate\Support\Facades\Storage;
  *
  */
 class Product extends Model {
+
+    use SoftDeletes;
 
     const TEMP_IMAGE_DIR = 'temp';
     const IMAGE_DIR = 'public/products';

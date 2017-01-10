@@ -70,7 +70,7 @@ class ProductsController extends Controller {
      */
     public function destroy($id)
     {
-        //
+        Product::destroy($id);
     }
 
     private function move_image(Product $product, $image)

@@ -109,10 +109,11 @@
 
         <div class="Form-group">
           <button class="Button Button--primary" type="submit" v-bind:disabled="is_submit_disabled">{{ submit_text ? submit_text : 'Save' }}</button>
-          <router-link class="Button Button--cancel" v-bind:to="{ name: 'admin_products' }">cancel</router-link>
         </div>
 
       </form>
+
+      <span class="ProductForm-delete" v-show="product.id" v-on:click="destroy">Delete this item</span>
     </div>
 
   </div>
@@ -223,6 +224,12 @@
                     this.notification = notification;
                 });
 
+            },
+
+            destroy() {
+                productsService.delete(this.product.id).then(() => {
+                    this.notification = 'Product Deleted';
+                });
             },
 
             add_primary_option() {
