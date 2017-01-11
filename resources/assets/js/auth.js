@@ -43,7 +43,7 @@ function is_authenticated() {
 function get_seconds_until_logout() {
     let jwtStr            = localStorage.getItem('id_token');
     let seconds_remaining = (typeof jwtStr === 'string') ? (jwtDecode(jwtStr).exp - Date.now() / 1000) : 0;
-    let buffer            = 50; // Don't go down to the last second to avoid (user) race condition issues.
+    let buffer            = 15; // Don't go down to the last second to avoid (user) race condition issues.
 
     return Math.round(Math.max(0, seconds_remaining - buffer));
 }

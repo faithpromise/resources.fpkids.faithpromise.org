@@ -11,7 +11,7 @@
     import auth from '../auth';
 
     let countdown_timer;
-    let show_warning_at = 30;
+    let show_warning_at = 60;
 
     export default {
 

@@ -46,8 +46,8 @@
                 error:               null,
                 is_password_visible: false,
                 credentials:         {
-                    email:    'kelseyr@faithpromise.org',
-                    password: '1234'
+                    email:    '',
+                    password: ''
                 }
             }
         },
