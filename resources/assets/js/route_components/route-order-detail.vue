@@ -14,7 +14,8 @@
             <div class="CartItem-image" v-bind:style="{ backgroundImage: item.product.image_url ? ('url(' + item.product.image_url + ')') : 'none' }"></div>
           </div>
           <div class="CartItem-info">
-            <router-link class="CartItem-name" v-bind:to="{ name: 'product', params: { id: item.product.id } }">{{ item.product.name }}</router-link>
+            <router-link class="CartItem-name" v-bind:to="{ name: 'product', params: { id: item.product.id } }" v-show="!item.product.is_deleted">{{ item.product.name }}</router-link>
+            <span class="CartItem-name" v-show="item.product.is_deleted">{{ item.product.name }}<br>[PRODUCT DISCONTINUED]</span>
             <p class="CartItem-description" v-if="item.choices">{{ item.choices }}</p>
           </div>
           <div class="CartItem-qty">

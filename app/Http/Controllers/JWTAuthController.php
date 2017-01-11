@@ -30,14 +30,14 @@ class JWTAuthController extends Controller {
     {
 
         try {
-            $newToken = JWTAuth::parseToken()->refresh();
+            $token = JWTAuth::parseToken()->refresh();
         } catch (TokenExpiredException $e) {
             return response()->json(['error' => 'token_expired'], $e->getStatusCode());
         } catch (JWTException $e) {
             return response()->json(['error' => 'could_not_refresh_token'], 500);
         }
 
-        return response()->json(compact('newToken'));
+        return response()->json(compact('token'));
 
     }
 

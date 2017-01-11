@@ -5,11 +5,11 @@ use Illuminate\Support\Facades\App;
 $is_production = App::environment('production');
 
 $scripts = [
-        '//cdn.rawgit.com/taylorhakes/promise-polyfill/master/promise.js',
-        '//unpkg.com/axios/dist/axios' . ($is_production ? '.min.js' : '.js'),
-        '//cdnjs.cloudflare.com/ajax/libs/vue/2.1.6/vue' . ($is_production ? '.min.js' : '.js'),
-        '//unpkg.com/vue-router@2.1.1/dist/vue-router' . ($is_production ? '.min.js' : '.js'),
-        '//cdnjs.cloudflare.com/ajax/libs/vuex/2.0.0/vuex' . ($is_production ? '.min.js' : '.js')
+    '//cdn.rawgit.com/taylorhakes/promise-polyfill/master/promise.js',
+    '//unpkg.com/axios/dist/axios' . ($is_production ? '.min.js' : '.js'),
+    '//cdnjs.cloudflare.com/ajax/libs/vue/2.1.6/vue' . ($is_production ? '.min.js' : '.js'),
+    '//unpkg.com/vue-router@2.1.1/dist/vue-router' . ($is_production ? '.min.js' : '.js'),
+    '//cdnjs.cloudflare.com/ajax/libs/vuex/2.0.0/vuex' . ($is_production ? '.min.js' : '.js')
 ];
 
 ?><!DOCTYPE html>
@@ -57,6 +57,7 @@ $scripts = [
         </svg>
 
         <div class="Layout" id="app">
+            <logout-countdown></logout-countdown>
             <router-view></router-view>
         </div>
 

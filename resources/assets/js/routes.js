@@ -13,6 +13,8 @@ import adminProductEdit from './route_components/route-admin-product-edit.vue';
 import adminOrders from './route_components/route-admin-orders.vue';
 import auth from './auth';
 
+const LOGIN_ROUTE_NAME = 'login';
+
 const routes = [
     {
         name:      'home',
@@ -86,22 +88,14 @@ const routes = [
 ];
 
 const router = new VueRouter({
-                    routes,
+    routes,
     mode:           'history',
     scrollBehavior: (to, from, savedPosition) => {
         return savedPosition ? savedPosition : { x: 0, y: 0 }
     }
 });
 
-
 router.beforeEach((to, from, next) => {
-
-    // console.log('to', to);
-    // console.log('from', from);
-
-    // Set body class
-    document.body.classList.remove(from.name + '_page');
-    document.body.classList.add(to.name + '_page');
 
     // Check login
     let requires_login = false;
@@ -111,10 +105,10 @@ router.beforeEach((to, from, next) => {
     });
 
     // Login page does not require login
-    requires_login = to.name === 'login' ? false : requires_login;
+    requires_login = to.name === LOGIN_ROUTE_NAME ? false : requires_login;
 
     if (requires_login && !auth.is_authenticated()) {
-        next({ name: 'login' });
+        next({ name: LOGIN_ROUTE_NAME });
     } else {
         next();
     }

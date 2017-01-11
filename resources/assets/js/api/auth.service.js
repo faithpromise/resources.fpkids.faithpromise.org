@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 const LOGIN_URL = '/api/login';
+const REFRESH_URL = '/api/login/refresh';
 
 export default {
 
@@ -9,7 +10,7 @@ export default {
     },
 
     refresh() {
-
+        return axios.get(REFRESH_URL);
     }
 
 }

@@ -12,7 +12,7 @@ class PackagingController extends Controller {
      *
      * @return mixed
      */
-    public function index(Request $request)
+    public function index()
     {
 
         $orderItems = OrderItem::with('order')->with('product')->where(function($query) {

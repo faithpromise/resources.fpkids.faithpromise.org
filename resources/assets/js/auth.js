@@ -1,16 +1,10 @@
 import axios from 'axios';
 import router from './routes';
-import store from './store';
 import jwtDecode from 'jwt-decode';
 import authService from './api/auth.service';
 
 const LOGIN_REDIRECT_TO = '/admin/products';
-
-let logout_timer  = null;
-let refresh_timer = null;
-
-updateAuthStatus();
-set_timers();
+const LOGIN_ROUTE_NAME  = 'login';
 
 axios.interceptors.request.use(function (config) {
     config.headers = { 'Authorization': 'Bearer ' + localStorage.getItem('id_token') };
@@ -20,10 +14,26 @@ axios.interceptors.request.use(function (config) {
     // return Promise.reject(error);
 });
 
-function updateAuthStatus() {
-    console.log('updateAuthStatus');
-    store.dispatch('SET_AUTH_STATUS', is_authenticated());
-    store.dispatch('SET_LOGOUT_WARNING', should_show_logout_warning());
+console.log(typeof router);
+
+export default {
+
+    get_seconds_until_logout,
+    is_authenticated,
+    logout,
+    refresh,
+
+    login(credentials, redirect = LOGIN_REDIRECT_TO) {
+
+        return authService.login(credentials).then((result) => {
+
+            localStorage.setItem('id_token', result.data.token);
+
+            if (redirect) router.push(redirect);
+
+        });
+    }
+
 }
 
 function is_authenticated() {
@@ -33,77 +43,18 @@ function is_authenticated() {
 function get_seconds_until_logout() {
     let jwtStr            = localStorage.getItem('id_token');
     let seconds_remaining = (typeof jwtStr === 'string') ? (jwtDecode(jwtStr).exp - Date.now() / 1000) : 0;
+    let buffer            = 50; // Don't go down to the last second to avoid (user) race condition issues.
 
-    return Math.round(Math.max(0, seconds_remaining));
-}
-
-function get_seconds_until_refresh() {
-    return Math.max(get_seconds_until_logout() - 180, 0);
-}
-
-function should_show_logout_warning() {
-    return is_authenticated() && get_seconds_until_refresh() < 2; // Buffer it a bit in case timeout is off
-}
-
-function set_timers() {
-
-    let seconds_remaining_until_logout  = get_seconds_until_logout();
-    let seconds_remaining_until_warning = get_seconds_until_refresh();
-
-    console.log('seconds_remaining_until_logout', seconds_remaining_until_logout);
-    console.log('seconds_remaining_until_warning', seconds_remaining_until_warning);
-
-    clearTimeout(logout_timer);
-    clearTimeout(refresh_timer);
-
-    if (seconds_remaining_until_logout) {
-
-        logout_timer = setTimeout(() => {
-            logout();
-        }, seconds_remaining_until_logout * 1000);
-
-        refresh_timer = setTimeout(() => {
-            updateAuthStatus();
-        }, seconds_remaining_until_warning * 1000);
-
-    }
-
+    return Math.round(Math.max(0, seconds_remaining - buffer));
 }
 
 function refresh() {
-    axios.get('/api/login/refresh').then((result) => {
+    return authService.refresh().then((result) => {
         localStorage.setItem('id_token', result.data.token);
-        updateAuthStatus();
-        set_timers();
     });
 }
 
 function logout() {
     localStorage.removeItem('id_token');
-    updateAuthStatus();
-    router.push({ name: 'login' });
-}
-
-export default {
-
-    user: {},
-
-    get_seconds_until_logout,
-    is_authenticated,
-    logout,
-
-    login(credentials, redirect = LOGIN_REDIRECT_TO) {
-
-        return authService.login(credentials).then((result) => {
-
-            localStorage.setItem('id_token', result.data.token);
-
-            updateAuthStatus();
-            set_timers();
-
-            if (redirect) router.push(redirect);
-
-        });
-    }
-
+    router.push({ name: LOGIN_ROUTE_NAME });
 }

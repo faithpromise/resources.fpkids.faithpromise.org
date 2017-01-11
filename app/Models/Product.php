@@ -32,7 +32,7 @@ class Product extends Model {
 
     protected $guarded = [];
     protected $hidden = ['category_id', 'created_at', 'updated_at', 'deleted_at'];
-    protected $appends = ['image_url'];
+    protected $appends = ['image_url', 'is_deleted'];
 
     protected $casts = [
         'quantities' => 'json',
@@ -65,6 +65,11 @@ class Product extends Model {
     public function getImagePath($ext = 'jpg')
     {
         return self::IMAGE_DIR . '/' . $this->getImageFileName($ext);
+    }
+
+    public function getIsDeletedAttribute()
+    {
+        return $this->deleted_at !== null;
     }
 
 }
