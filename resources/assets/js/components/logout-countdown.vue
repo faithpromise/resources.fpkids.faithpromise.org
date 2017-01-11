@@ -50,6 +50,11 @@
 
                 if (countdown_timer) clearInterval(countdown_timer);
 
+                // No need for logout warning if not logged in
+                if (!auth.is_authenticated()) {
+                    return;
+                }
+
                 let seconds_until_logout = auth.get_seconds_until_logout();
                 this.countdown           = seconds_until_logout <= show_warning_at ? seconds_until_logout : null;
 
