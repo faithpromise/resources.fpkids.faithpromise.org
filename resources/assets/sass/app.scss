@@ -63,39 +63,6 @@ body.main {
 @import "components/Login";
 @import "components/LoginForm";
 
-.LogoutWarning {
-  position:         fixed;
-  z-index:          10000;
-  top:              0;
-  right:            0;
-  bottom:           0;
-  left:             0;
-  display:          flex;
-  flex-direction:   column;
-  justify-content:  center;
-  align-items:      center;
-  background-color: rgba(0, 0, 0, 0.8);
-  color:            #fff;
-
-  transition:       opacity 200ms ease;
-
-  &.v-enter {
-    opacity: 0;
-  }
-}
-
-.LogoutWarning-text {
-  font-size: 2.75em;
-}
-
-.LogoutWarning-button {
-  padding:          1em 2em;
-  border-radius:    4px;
-  background-color: #08c;
-  color:            #fff;
-  cursor:           pointer;
-}
-
 .Button {
   display:        inline-block;
   margin:         0;

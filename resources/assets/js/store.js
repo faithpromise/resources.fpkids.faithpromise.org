@@ -1,23 +1,15 @@
 import Vuex from 'vuex';
 
 const state = {
-    is_user_authenticated:     false,
-    is_logout_warning_visible: false,
-    nav_visible:               false,
-    cart_visible:              false,
-    products:                  [],
-    selected_product:          null,
-    cart:                      [],
-    back_button:               null
+    nav_visible:      false,
+    cart_visible:     false,
+    products:         [],
+    selected_product: null,
+    cart:             [],
+    back_button:      null
 };
 
 const mutations = {
-    SET_AUTH_STATUS:    function (state, value) {
-        state.is_user_authenticated = value;
-    },
-    SET_LOGOUT_WARNING: function (state, value) {
-        state.is_logout_warning_visible = value;
-    },
     HIDE_NAV:           function (state) {
         state.nav_visible     = false;
         state.filters_visible = false;
@@ -63,17 +55,7 @@ const mutations = {
     }
 };
 
-const actions = {
-    SET_AUTH_STATUS:    function (context, value) {
-        context.commit('SET_AUTH_STATUS', value);
-    },
-    SET_LOGOUT_WARNING: function (context, value) {
-        context.commit('SET_LOGOUT_WARNING', value);
-    }
-};
-
 export default new Vuex.Store({
     state,
-    mutations,
-    actions
+    mutations
 });
