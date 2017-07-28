@@ -50,7 +50,7 @@ class OrdersController extends Controller {
 
         $order->load('items.product');
 
-        Mail::to($order->email)->cc('kelseyr@faithpromise.org')->send(new OrderConfirmation($order));
+        Mail::to($order->email)->cc('ginam@faithpromise.org')->send(new OrderConfirmation($order));
 
     }
 
