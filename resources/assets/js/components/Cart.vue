@@ -58,6 +58,7 @@
                 <option value="Anderson">Anderson</option>
                 <option value="Blount">Blount</option>
                 <option value="Campbell">Campbell</option>
+                <option value="Farragut">Farragut</option>
                 <option value="North Knox">North Knox</option>
                 <option value="Pellissippi">Pellissippi</option>
               </select>
