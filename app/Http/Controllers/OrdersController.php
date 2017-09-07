@@ -53,7 +53,7 @@ class OrdersController extends Controller {
         $cc = collect([['email' => 'ginam@faithpromise.org', 'name' => 'Gina McClain'], ['email' => 'adamw@faithpromise.org', 'name' => 'Adam Wilkerson'], ['email' => 'tiffanyr@faithpromise.org', 'name' => 'Tiffany Reid']]);
 
         Mail::to($order->email)
-            ->bcc($cc)
+            ->cc($cc)
             ->send(new OrderConfirmation($order));
 
     }
