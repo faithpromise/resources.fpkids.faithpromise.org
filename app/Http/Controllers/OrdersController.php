@@ -32,7 +32,7 @@ class OrdersController extends Controller {
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
+     * @return void
      */
     public function store(Request $request)
     {
@@ -50,7 +50,11 @@ class OrdersController extends Controller {
 
         $order->load('items.product');
 
-        Mail::to($order->email)->cc('ginam@faithpromise.org')->send(new OrderConfirmation($order));
+        Mail::to($order->email)
+            ->cc('ginam@faithpromise.org')
+            ->cc('adamw@faithpromise.org')
+            ->cc('tiffanyr@faithpromise.org')
+            ->send(new OrderConfirmation($order));
 
     }
 
