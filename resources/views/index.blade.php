@@ -6,10 +6,10 @@ $is_production = App::environment('production');
 
 $scripts = [
     '//cdn.rawgit.com/taylorhakes/promise-polyfill/master/promise.js',
-    '//unpkg.com/axios/dist/axios' . ($is_production ? '.min.js' : '.js'),
-    '//cdnjs.cloudflare.com/ajax/libs/vue/2.1.6/vue' . ($is_production ? '.min.js' : '.js'),
-    '//unpkg.com/vue-router@2.1.1/dist/vue-router' . ($is_production ? '.min.js' : '.js'),
-    '//cdnjs.cloudflare.com/ajax/libs/vuex/2.0.0/vuex' . ($is_production ? '.min.js' : '.js')
+    'https://unpkg.com/axios@0.16.0/dist/axios' . ($is_production ? '.min.js' : '.js'),
+    '//cdnjs.cloudflare.com/ajax/libs/vue/2.2.6/vue' . ($is_production ? '.min.js' : '.js'),
+    '//cdnjs.cloudflare.com/ajax/libs/vue-router/2.3.1/vue-router' . ($is_production ? '.min.js' : '.js'),
+    '//cdnjs.cloudflare.com/ajax/libs/vuex/2.2.1/vuex' . ($is_production ? '.min.js' : '.js')
 ];
 
 ?><!DOCTYPE html>
