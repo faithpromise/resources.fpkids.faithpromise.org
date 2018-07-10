@@ -50,7 +50,7 @@ class OrdersController extends Controller {
 
         $order->load('items.product');
 
-        $cc = collect([['email' => 'ginam@faithpromise.org', 'name' => 'Gina McClain'], ['email' => 'adamw@faithpromise.org', 'name' => 'Adam Wilkerson'], ['email' => 'tiffanyr@faithpromise.org', 'name' => 'Tiffany Reid']]);
+        $cc = collect([['email' => 'adamw@faithpromise.org', 'name' => 'Adam Wilkerson'], ['email' => 'tiffanyr@faithpromise.org', 'name' => 'Tiffany Reid']]);
 
         Mail::to($order->email)
             ->cc($cc)
