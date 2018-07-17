@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\App;
 $is_production = App::environment('production');
 
 $scripts = [
-    '//cdn.rawgit.com/taylorhakes/promise-polyfill/master/promise.js',
+    'https://cdn.jsdelivr.net/npm/promise-polyfill@8/dist/polyfill.min.js',
     'https://unpkg.com/axios@0.16.0/dist/axios' . ($is_production ? '.min.js' : '.js'),
     '//cdnjs.cloudflare.com/ajax/libs/vue/2.2.6/vue' . ($is_production ? '.min.js' : '.js'),
     '//cdnjs.cloudflare.com/ajax/libs/vue-router/2.3.1/vue-router' . ($is_production ? '.min.js' : '.js'),
